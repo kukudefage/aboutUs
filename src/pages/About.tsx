@@ -1,14 +1,11 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import Timeline from '@/components/Timeline';
 import SkillBar from '@/components/SkillBar';
-import { experiences } from '@/data/experience';
 import { skills } from '@/data/skills';
 import { articles } from '@/data/articles';
 
 export default function About() {
   const introRef = useScrollReveal<HTMLDivElement>();
   const storyRef = useScrollReveal<HTMLDivElement>();
-  const timelineRef = useScrollReveal<HTMLDivElement>();
   const skillsRef = useScrollReveal<HTMLDivElement>();
 
   const frameworkSkills = skills.filter((s) => s.category === '前端框架');
@@ -104,22 +101,6 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding px-6 md:px-8 bg-cream-50">
-        <div className="container">
-          <div ref={timelineRef} className="reveal">
-            <div className="text-center mb-16">
-              <span className="font-sans text-xs tracking-[0.2em] text-ochre-500 uppercase">
-                经历
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-medium text-ink-900 mt-3">
-                一路走来
-              </h2>
-            </div>
-            <Timeline experiences={experiences} />
           </div>
         </div>
       </section>
