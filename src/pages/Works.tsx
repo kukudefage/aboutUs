@@ -1,19 +1,35 @@
 import { useState } from 'react';
-import ProjectCard from '@/components/ProjectCard';
-import { projects } from '@/data/projects';
+import ArticleCard from '@/components/ArticleCard';
+import { articles } from '@/data/articles';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
-const categories = ['全部', 'Web 设计', '移动应用', '品牌网站', '内容平台', '品牌设计'];
+const allCategories = [
+  '全部',
+  'React',
+  'TypeScript',
+  'Vue',
+  'JavaScript',
+  '工程化',
+  '性能优化',
+  '架构',
+  'Node.js',
+  '数据库',
+  '安全',
+  '测试',
+  '前端趋势',
+];
 
 export default function Works() {
   const [activeCategory, setActiveCategory] = useState('全部');
   const headerRef = useScrollReveal<HTMLDivElement>();
-  const gridRef = useScrollReveal<HTMLDivElement>();
+  const listRef = useScrollReveal<HTMLDivElement>();
 
-  const filteredProjects =
+  const sortedArticles = [...articles].reverse();
+
+  const filteredArticles =
     activeCategory === '全部'
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      ? sortedArticles
+      : sortedArticles.filter((a) => a.category === activeCategory);
 
   return (
     <div className="pt-32">
@@ -24,16 +40,17 @@ export default function Works() {
             className="reveal max-w-3xl mx-auto text-center"
           >
             <span className="font-sans text-xs tracking-[0.2em] text-ochre-500 uppercase">
-              作品集
+              技术文章
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-medium text-ink-900 mt-4 mb-6 text-balance">
-              用心打磨的
-              <span className="font-display-italic text-ochre-500"> 每一个 </span>
-              项目
+              每周一篇
+              <span className="font-display-italic text-ochre-500"> 技术 </span>
+              分享
             </h1>
             <p className="text-ink-500 text-lg leading-relaxed">
-              从品牌设计到网站开发，从移动应用到内容平台——
-              每一个项目都是一次与客户共同的探索之旅。
+              从 2023 年开始坚持每周更新一篇技术文章，
+              涵盖前端开发、工程化、性能优化等领域。
+              共 <span className="text-ochre-500 font-medium">{articles.length}</span> 篇，持续更新中。
             </p>
           </div>
         </div>
@@ -41,9 +58,9 @@ export default function Works() {
 
       <section className="px-6 md:px-8 pb-20 md:pb-28">
         <div className="container">
-          <div ref={gridRef} className="reveal">
+          <div ref={listRef} className="reveal">
             <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {categories.map((category) => (
+              {allCategories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
@@ -58,22 +75,24 @@ export default function Works() {
               ))}
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-              {filteredProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                />
+            <div className="max-w-3xl mx-auto space-y-2">
+              {filteredArticles.map((article, index) => (
+                <ArticleCard key={article.id} article={article} index={index} />
               ))}
             </div>
 
-            {filteredProjects.length === 0 && (
+            {filteredArticles.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-ink-400 font-sans">
-                  该分类下暂无作品
+                  该分类下暂无文章
                 </p>
               </div>
+            )}
+
+            {filteredArticles.length > 0 && (
+              <p className="text-center font-sans text-sm text-ink-400 mt-10">
+                共 {filteredArticles.length} 篇文章
+              </p>
             )}
           </div>
         </div>

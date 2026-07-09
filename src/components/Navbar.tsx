@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { path: '/', label: '首页' },
   { path: '/about', label: '关于' },
-  { path: '/works', label: '作品' },
+  { path: '/works', label: '文章' },
   { path: '/contact', label: '联系' },
 ];
 

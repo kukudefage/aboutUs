@@ -3,6 +3,7 @@ import Timeline from '@/components/Timeline';
 import SkillBar from '@/components/SkillBar';
 import { experiences } from '@/data/experience';
 import { skills } from '@/data/skills';
+import { articles } from '@/data/articles';
 
 export default function About() {
   const introRef = useScrollReveal<HTMLDivElement>();
@@ -10,9 +11,9 @@ export default function About() {
   const timelineRef = useScrollReveal<HTMLDivElement>();
   const skillsRef = useScrollReveal<HTMLDivElement>();
 
-  const designSkills = skills.filter((s) => s.category === '设计');
-  const devSkills = skills.filter((s) => s.category === '开发');
-  const toolSkills = skills.filter((s) => s.category === '工具');
+  const frameworkSkills = skills.filter((s) => s.category === '前端框架');
+  const langSkills = skills.filter((s) => s.category === '编程语言' || s.category === '基础技术');
+  const otherSkills = skills.filter((s) => s.category === '工程化' || s.category === '服务端' || s.category === '工具' || s.category === '测试' || s.category === '数据库');
 
   return (
     <div className="pt-32">
@@ -24,12 +25,13 @@ export default function About() {
               关于我
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-medium text-ink-900 mt-4 mb-8 text-balance">
-              在<span className="font-display-italic text-ochre-500">极简</span>中，
+              一个<span className="font-display-italic text-ochre-500">热爱代码</span>的
               <br />
-              寻找设计的本质
+              前端工程师
             </h1>
             <p className="text-ink-500 text-lg leading-relaxed">
-              你好，我是墨白。一名热爱设计与代码的独立创作者。
+              你好，我是码匠。一名专注于前端技术的工程师，
+              也是一名坚持每周写作的技术博主。
             </p>
           </div>
         </div>
@@ -41,7 +43,7 @@ export default function About() {
             <div className="md:col-span-2">
               <div className="aspect-[3/4] bg-cream-200 overflow-hidden">
                 <img
-                  src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=portrait%20of%20a%20young%20asian%20designer%20minimalist%20style%20warm%20lighting%20soft%20shadows%20cream%20background%20elegant&image_size=portrait_4_3"
+                  src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=young%20asian%20male%20developer%20working%20at%20laptop%20modern%20minimal%20workspace%20warm%20lighting%20clean%20background&image_size=portrait_4_3"
                   alt="个人照片"
                   className="w-full h-full object-cover"
                 />
@@ -54,50 +56,50 @@ export default function About() {
               </h2>
               <div className="space-y-5 text-ink-600 leading-relaxed">
                 <p className="first-letter:font-display first-letter:text-5xl first-letter:font-medium first-letter:text-ochre-500 first-letter:float-left first-letter:mr-2 first-letter:leading-none">
-                  从美术学院毕业后，我进入了互联网行业，成为了一名设计师。
-                  起初，我热衷于繁复的效果和炫目的视觉冲击，以为那就是好设计。
+                  从大学时代第一次写出 Hello World 开始，
+                  我就被前端开发的即时反馈和无限可能深深吸引。
+                  一行代码就能在屏幕上看到变化，这种创造感让我欲罢不能。
                 </p>
                 <p>
-                  直到后来我才慢慢明白，真正的设计不是加法，而是减法。
-                  就像米开朗基罗说的那样——"我只是把多余的石头去掉"。
-                  设计的本质，是在限制中寻找自由，在简约中追求丰富。
+                  七年来，我从小白成长为能够独立负责前端架构的工程师。
+                  经历了 jQuery 到 React、Webpack 到 Vite、JavaScript 到 TypeScript 的演进，
+                  每一次技术变革都让我更加敬畏这个快速发展的领域。
                 </p>
                 <p>
-                  于是我开始学习代码，因为我相信，一个好的设计师应当懂得如何实现自己的设计。
-                  从 Figma 到 VS Code，从像素到代码，我在设计与开发的交汇处，
-                  找到了属于自己的表达方式。
+                  我相信，好的代码和好的文章一样——都需要清晰的结构、恰到好处的注释，
+                  以及能让下一个人（或未来的自己）轻松理解的诚意。
+                  这也是为什么我坚持写技术博客：分享不仅是输出，更是最好的学习方式。
                 </p>
                 <p>
-                  如今，作为一名独立设计师与开发者，
-                  我与志同道合的客户合作，共同打造有温度、有灵魂的数字产品。
-                  我相信，好的设计应当像呼吸一样自然——
-                  你甚至感觉不到它的存在，却又无处不在。
+                  除了工作，我也是一名开源爱好者，活跃于 GitHub 社区。
+                  闲暇时喜欢研究新的前端技术、阅读源码，或者泡一杯茶写点什么。
+                  如果你也对前端技术充满热情，欢迎随时找我交流！
                 </p>
               </div>
 
               <div className="mt-10 grid grid-cols-3 gap-6">
                 <div>
                   <div className="font-display text-3xl md:text-4xl font-medium text-ochre-500">
-                    8+
+                    7+
                   </div>
                   <div className="font-sans text-sm text-ink-400 mt-1">
-                    年设计经验
+                    年前端经验
                   </div>
                 </div>
                 <div>
                   <div className="font-display text-3xl md:text-4xl font-medium text-ochre-500">
-                    50+
+                    {articles.length}+
                   </div>
                   <div className="font-sans text-sm text-ink-400 mt-1">
-                    完成项目
+                    技术文章
                   </div>
                 </div>
                 <div>
                   <div className="font-display text-3xl md:text-4xl font-medium text-ochre-500">
-                    30+
+                    2k+
                   </div>
                   <div className="font-sans text-sm text-ink-400 mt-1">
-                    合作客户
+                    GitHub Stars
                   </div>
                 </div>
               </div>
@@ -130,7 +132,7 @@ export default function About() {
                 技能
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-medium text-ink-900 mt-3">
-                我的工具箱
+                我的技术栈
               </h2>
             </div>
 
@@ -138,10 +140,10 @@ export default function About() {
               <div>
                 <h3 className="font-display text-xl font-medium text-ink-900 mb-6 flex items-center gap-3">
                   <span className="w-8 h-px bg-ochre-500" />
-                  设计
+                  前端框架
                 </h3>
                 <div className="space-y-5">
-                  {designSkills.map((skill, index) => (
+                  {frameworkSkills.map((skill, index) => (
                     <SkillBar key={skill.id} skill={skill} index={index} />
                   ))}
                 </div>
@@ -150,10 +152,10 @@ export default function About() {
               <div>
                 <h3 className="font-display text-xl font-medium text-ink-900 mb-6 flex items-center gap-3">
                   <span className="w-8 h-px bg-ochre-500" />
-                  开发
+                  语言与基础
                 </h3>
                 <div className="space-y-5">
-                  {devSkills.map((skill, index) => (
+                  {langSkills.map((skill, index) => (
                     <SkillBar key={skill.id} skill={skill} index={index} />
                   ))}
                 </div>
@@ -162,10 +164,10 @@ export default function About() {
               <div>
                 <h3 className="font-display text-xl font-medium text-ink-900 mb-6 flex items-center gap-3">
                   <span className="w-8 h-px bg-ochre-500" />
-                  工具
+                  工程化与工具
                 </h3>
                 <div className="space-y-5">
-                  {toolSkills.map((skill, index) => (
+                  {otherSkills.map((skill, index) => (
                     <SkillBar key={skill.id} skill={skill} index={index} />
                   ))}
                 </div>
