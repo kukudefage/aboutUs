@@ -87,9 +87,9 @@ export default function Home() {
   const projectCount = useCountUp({ end: 26, duration: 2000, delay: 800 });
   const codeCount = useCountUp({ end: 500, duration: 3000, delay: 1100 });
 
-  const magneticBtn1 = useMagnetic({ strength: 15, scale: 1.03 });
-  const magneticBtn2 = useMagnetic({ strength: 12, scale: 1.02 });
-  const magneticCta = useMagnetic({ strength: 20, scale: 1.05 });
+  const magneticBtn1 = useMagnetic<HTMLAnchorElement>({ strength: 15, scale: 1.03 });
+  const magneticBtn2 = useMagnetic<HTMLAnchorElement>({ strength: 12, scale: 1.02 });
+  const magneticCta = useMagnetic<HTMLAnchorElement>({ strength: 20, scale: 1.05 });
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -157,9 +157,9 @@ export default function Home() {
           >
             <Link
               to="/works"
-              ref={magneticBtn1.ref as React.RefObject<HTMLAnchorElement>}
-              onMouseMove={magneticBtn1.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
-              onMouseLeave={magneticBtn1.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              ref={magneticBtn1.ref}
+              onMouseMove={magneticBtn1.onMouseMove}
+              onMouseLeave={magneticBtn1.onMouseLeave}
               className="btn-glow group inline-flex"
             >
               <Sparkles className="w-4 h-4 mr-2" strokeWidth={1.5} />
@@ -168,9 +168,9 @@ export default function Home() {
             </Link>
             <Link
               to="/contact"
-              ref={magneticBtn2.ref as React.RefObject<HTMLAnchorElement>}
-              onMouseMove={magneticBtn2.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
-              onMouseLeave={magneticBtn2.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              ref={magneticBtn2.ref}
+              onMouseMove={magneticBtn2.onMouseMove}
+              onMouseLeave={magneticBtn2.onMouseLeave}
               className="btn-neon-outline group inline-flex"
             >
               <Zap className="w-4 h-4 mr-2" strokeWidth={1.5} />
@@ -373,9 +373,9 @@ export default function Home() {
                   </p>
                   <Link
                     to="/contact"
-                    ref={magneticCta.ref as React.RefObject<HTMLAnchorElement>}
-                    onMouseMove={magneticCta.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
-                    onMouseLeave={magneticCta.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+                    ref={magneticCta.ref}
+                    onMouseMove={magneticCta.onMouseMove}
+                    onMouseLeave={magneticCta.onMouseLeave}
                     className="btn-glow text-base px-8 py-3.5 inline-flex"
                   >
                     开始对话

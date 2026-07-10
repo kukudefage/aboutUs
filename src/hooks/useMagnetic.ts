@@ -5,7 +5,7 @@ interface UseMagneticOptions {
   scale?: number;
 }
 
-export function useMagnetic<T extends HTMLElement = HTMLDivElement>({
+export function useMagnetic<T extends HTMLElement = HTMLElement>({
   strength = 30,
   scale = 1.05,
 }: UseMagneticOptions = {}) {
