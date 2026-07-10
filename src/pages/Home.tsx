@@ -267,7 +267,7 @@ export default function Home() {
             <div
               className="flex"
               style={{
-                animation: 'marquee2 30s linear infinite',
+                animation: 'marquee2 15s linear infinite',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.animationPlayState = 'paused'; }}
               onMouseLeave={(e) => { e.currentTarget.style.animationPlayState = 'running'; }}
