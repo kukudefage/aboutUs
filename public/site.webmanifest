@@ -1,0 +1,14 @@
+{
+  "name": "lizhifa · 前端开发与技术分享",
+  "short_name": "lizhifa",
+  "description": "一个安静、克制、专注于内容本身的个人空间。记录前端工程实践、设计思考与代码片段。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0c1c",
+  "theme_color": "#0c0c1c",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

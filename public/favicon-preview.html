@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favicon Preview · lizhifa</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg-0: #05050d;
+        --bg-1: #0c0c1c;
+        --bg-2: #14142b;
+        --line: rgba(255,255,255,0.08);
+        --text-1: #f5f5fa;
+        --text-2: #a0a0b8;
+        --text-3: #6a6a82;
+        --cyan: #22d3ee;
+        --purple: #a855f7;
+        --pink: #ec4899;
+        --grad: linear-gradient(135deg, #22d3ee 0%, #a855f7 50%, #ec4899 100%);
+      }
+      html, body {
+        background:
+          radial-gradient(1200px 800px at 10% -10%, rgba(168,85,247,0.15), transparent 60%),
+          radial-gradient(900px 600px at 100% 0%, rgba(34,211,238,0.10), transparent 60%),
+          var(--bg-0);
+        color: var(--text-1);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 1200px; margin: 0 auto; padding: 56px 28px 96px; }
+
+      /* ====== Header ====== */
+      .header { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; }
+      .header .logo {
+        width: 56px; height: 56px; border-radius: 14px; overflow: hidden;
+        box-shadow: 0 12px 40px -10px rgba(168,85,247,0.5), 0 0 0 1px var(--line);
+      }
+      .header h1 {
+        font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+        background: var(--grad); -webkit-background-clip: text; background-clip: text;
+        color: transparent;
+      }
+      .header .sub { color: var(--text-2); font-size: 14px; margin-top: 2px; }
+      .topline { color: var(--text-3); font-size: 13px; margin: 18px 0 56px; max-width: 720px; line-height: 1.7; }
+      .topline b { color: var(--text-1); }
+
+      /* ====== Section ====== */
+      section { margin-bottom: 56px; }
+      .section-title {
+        display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
+        font-size: 13px; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.12em;
+      }
+      .section-title::before {
+        content: ""; width: 6px; height: 6px; border-radius: 50%;
+        background: var(--grad); box-shadow: 0 0 12px var(--purple);
+      }
+
+      /* ====== Size matrix ====== */
+      .size-matrix {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+      }
+      .size-card {
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+        border: 1px solid var(--line);
+        border-radius: 16px; padding: 28px 20px; text-align: center;
+        position: relative; overflow: hidden;
+        transition: transform .25s ease, border-color .25s ease;
+      }
+      .size-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); }
+      .size-card .holder {
+        display: flex; align-items: center; justify-content: center;
+        min-height: 140px;
+      }
+      .size-card img { display: block; image-rendering: -webkit-optimize-contrast; }
+      .size-card .label {
+        margin-top: 18px; color: var(--text-2); font-size: 12px; letter-spacing: 0.04em;
+        font-feature-settings: "tnum";
+      }
+      .size-card .px { color: var(--text-1); font-weight: 600; }
+
+      /* ====== Browser mock ====== */
+      .browser {
+        background: linear-gradient(180deg, #1a1a2e, #0e0e1c);
+        border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+        box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+      }
+      .browser-bar {
+        display: flex; align-items: center; gap: 8px; padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+      }
+      .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a2a3e; }
+      .dot:nth-child(1) { background: #ff5f57; }
+      .dot:nth-child(2) { background: #febc2e; }
+      .dot:nth-child(3) { background: #28c840; }
+      .tab {
+        display: flex; align-items: center; gap: 8px;
+        margin-left: 18px; padding: 6px 12px 6px 8px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 8px 8px 0 0; color: var(--text-1); font-size: 12px;
+        max-width: 220px;
+      }
+      .tab img { width: 16px; height: 16px; }
+      .tab .close { color: var(--text-3); margin-left: auto; }
+
+      .browser-body { padding: 48px 32px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; }
+      .browser-body h2 { font-size: 22px; font-weight: 700; }
+      .browser-body p { color: var(--text-2); font-size: 14px; }
+
+      /* ====== Bookmark bar ====== */
+      .bookmark-bar {
+        margin-top: 12px; padding: 10px 12px;
+        background: rgba(0,0,0,0.3);
+        display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        border-top: 1px solid var(--line);
+      }
+      .bookmark {
+        display: flex; align-items: center; gap: 8px;
+        padding: 6px 10px; border-radius: 6px;
+        font-size: 12px; color: var(--text-1);
+        background: rgba(255,255,255,0.04);
+      }
+      .bookmark img { width: 16px; height: 16px; }
+
+      /* ====== Mock contexts ====== */
+      .ctx-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .ctx {
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+        border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+      }
+      .ctx h3 { font-size: 14px; color: var(--text-1); margin-bottom: 16px; }
+      .ctx .ctx-body { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+      /* Google search result */
+      .search {
+        width: 100%; max-width: 640px; padding: 22px 24px;
+        background: #ffffff10; border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+      .search .url-line {
+        display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+      }
+      .search .url-line img { width: 18px; height: 18px; border-radius: 4px; }
+      .search .url-line .url { color: var(--cyan); font-size: 12px; }
+      .search .title { color: #8ab4f8; font-size: 18px; margin-bottom: 4px; }
+      .search .desc { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+
+      /* PWA card */
+      .pwa-card {
+        display: flex; align-items: center; gap: 14px;
+        background: #1a1a2e; border: 1px solid var(--line);
+        border-radius: 14px; padding: 14px 16px; max-width: 360px;
+      }
+      .pwa-card img { width: 56px; height: 56px; border-radius: 14px; }
+      .pwa-card .pwa-name { font-size: 14px; color: var(--text-1); }
+      .pwa-card .pwa-author { font-size: 12px; color: var(--text-2); }
+      .pwa-card .pwa-btn {
+        margin-left: auto; padding: 8px 14px; border-radius: 999px; font-size: 12px;
+        background: var(--grad); color: white; font-weight: 600;
+      }
+
+      /* App icon grid */
+      .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 360px; }
+      .app-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+      .app-tile img {
+        width: 64px; height: 64px; border-radius: 14px;
+        box-shadow: 0 10px 24px -8px rgba(0,0,0,0.6);
+      }
+      .app-tile .app-name { font-size: 11px; color: var(--text-2); }
+
+      /* Dark/Light toggle */
+      .themes { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .theme-block {
+        border: 1px solid var(--line); border-radius: 14px; padding: 28px;
+        display: flex; align-items: center; justify-content: center; gap: 18px;
+      }
+      .theme-block.dark { background: #0a0a14; }
+      .theme-block.light { background: #f5f5fa; }
+      .theme-block.light .lbl { color: #1a1a1a; }
+      .theme-block .lbl { font-size: 12px; color: var(--text-2); }
+
+      /* Spec table */
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+      th { color: var(--text-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
+      td { color: var(--text-1); }
+      td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-2); font-size: 12px; }
+
+      .panel {
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+        border: 1px solid var(--line); border-radius: 16px;
+        padding: 24px;
+      }
+
+      footer { text-align: center; color: var(--text-3); font-size: 12px; margin-top: 24px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <img class="logo" src="./public/favicon.svg" alt="favicon" />
+        <div>
+          <h1>Code Prism FE · Favicon</h1>
+          <div class="sub">lizhifa · 前端开发者技术分享平台</div>
+        </div>
+      </div>
+      <p class="topline">
+        一枚为 <b>深色赛博朋克风</b>前端博客定制的高辨识度 favicon。
+        主标 <b>FE</b> 取自 Front End，结合代码右尖括号 <b>&gt;</b> 强调代码身份；
+        配色采用 <b>青→紫→粉</b> 渐变，配合微弱外发光与玻璃高光，
+        在 16×16 到 512×512 任意尺寸下都保持清晰锐利。
+      </p>
+
+      <!-- 尺寸矩阵 -->
+      <section>
+        <div class="section-title">Size Matrix · 多尺寸可读性验证</div>
+        <div class="size-matrix">
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-16.png" alt="16" /></div>
+            <div class="label"><span class="px">16</span> · 浏览器标签</div>
+          </div>
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-32.png" alt="32" /></div>
+            <div class="label"><span class="px">32</span> · 任务栏 / 收藏夹</div>
+          </div>
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-48.png" alt="48" /></div>
+            <div class="label"><span class="px">48</span> · PWA 桌面</div>
+          </div>
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-64.png" alt="64" /></div>
+            <div class="label"><span class="px">64</span> · 高分屏标签</div>
+          </div>
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-128.png" alt="128" /></div>
+            <div class="label"><span class="px">128</span> · macOS Dock</div>
+          </div>
+          <div class="size-card">
+            <div class="holder"><img src="./public/favicon-256.png" alt="256" /></div>
+            <div class="label"><span class="px">256</span> · Retina 显示</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 浏览器标签 -->
+      <section>
+        <div class="section-title">Browser Tab · 真实使用场景</div>
+        <div class="browser">
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="tab">
+              <img src="./public/favicon-32.png" alt="" />
+              <span>lizhifa · 前端开发与技术分享</span>
+              <span class="close">×</span>
+            </div>
+          </div>
+          <div class="browser-body">
+            <h2 style="background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;">
+              Welcome to my digital garden
+            </h2>
+            <p>一个安静、克制、专注于内容本身的个人空间。</p>
+          </div>
+          <div class="bookmark-bar">
+            <div class="bookmark"><img src="./public/favicon-16.png" alt=""/>lizhifa</div>
+            <div class="bookmark"><img src="./public/favicon-16.png" alt=""/>作品集</div>
+            <div class="bookmark"><img src="./public/favicon-16.png" alt=""/>关于</div>
+            <div class="bookmark"><img src="./public/favicon-16.png" alt=""/>联系</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 多场景 -->
+      <section>
+        <div class="section-title">Real-world Contexts · 多场景适配</div>
+        <div class="ctx-grid">
+          <div class="ctx">
+            <h3>Google 搜索结果</h3>
+            <div class="search">
+              <div class="url-line">
+                <img src="./public/favicon-32.png" alt=""/>
+                <div>
+                  <div class="url">https://lizhifa.com</div>
+                </div>
+              </div>
+              <div class="title">lizhifa · 前端开发与技术分享</div>
+              <div class="desc">一个安静、克制、专注于内容本身的个人空间。记录前端工程实践、设计思考与代码片段。</div>
+            </div>
+          </div>
+
+          <div class="ctx">
+            <h3>PWA 安装卡片</h3>
+            <div class="pwa-card">
+              <img src="./public/favicon-180.png" alt=""/>
+              <div>
+                <div class="pwa-name">lizhifa</div>
+                <div class="pwa-author">lizhifa.com</div>
+              </div>
+              <div class="pwa-btn">安装</div>
+            </div>
+          </div>
+
+          <div class="ctx">
+            <h3>iOS 主屏图标</h3>
+            <div class="app-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 280px;">
+              <div class="app-tile">
+                <img src="./public/favicon-180.png" alt=""/>
+                <div class="app-name">lizhifa</div>
+              </div>
+              <div class="app-tile">
+                <img src="./public/favicon-180.png" alt=""/>
+                <div class="app-name">FE Notes</div>
+              </div>
+              <div class="app-tile">
+                <img src="./public/favicon-180.png" alt=""/>
+                <div class="app-name">Tech Share</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctx">
+            <h3>桌面应用图标</h3>
+            <div class="app-grid">
+              <div class="app-tile"><img src="./public/favicon-256.png" alt=""/><div class="app-name">lizhifa.app</div></div>
+              <div class="app-tile"><img src="./public/favicon-256.png" alt=""/><div class="app-name">Code</div></div>
+              <div class="app-tile"><img src="./public/favicon-256.png" alt=""/><div class="app-name">Dev</div></div>
+              <div class="app-tile"><img src="./public/favicon-256.png" alt=""/><div class="app-name">Notes</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 明暗双主题 -->
+      <section>
+        <div class="section-title">Theme Adaptability · 明暗双主题适配</div>
+        <div class="themes">
+          <div class="theme-block dark">
+            <img src="./public/favicon-64.png" alt=""/>
+            <div class="lbl">Dark · 深色背景</div>
+          </div>
+          <div class="theme-block light">
+            <img src="./public/favicon-64.png" alt=""/>
+            <div class="lbl">Light · 浅色背景</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 资源清单 -->
+      <section>
+        <div class="section-title">Asset Manifest · 输出资源清单</div>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr><th>File</th><th>尺寸</th><th>用途</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">public/favicon.svg</td><td>矢量</td><td>现代浏览器 / 主资源</td></tr>
+              <tr><td class="mono">public/favicon.ico</td><td>16/32/48/64/128/256</td><td>旧浏览器兜底 / Windows 任务栏</td></tr>
+              <tr><td class="mono">public/favicon-16.png</td><td>16×16</td><td>浏览器标签</td></tr>
+              <tr><td class="mono">public/favicon-32.png</td><td>32×32</td><td>收藏夹 / 标签</td></tr>
+              <tr><td class="mono">public/favicon-48.png</td><td>48×48</td><td>Windows 站点图标</td></tr>
+              <tr><td class="mono">public/favicon-64.png</td><td>64×64</td><td>高分屏标签</td></tr>
+              <tr><td class="mono">public/favicon-128.png</td><td>128×128</td><td>macOS Dock</td></tr>
+              <tr><td class="mono">public/favicon-180.png</td><td>180×180</td><td>apple-touch-icon (iOS)</td></tr>
+              <tr><td class="mono">public/favicon-192.png</td><td>192×192</td><td>Android / PWA</td></tr>
+              <tr><td class="mono">public/favicon-256.png</td><td>256×256</td><td>Retina 显示</td></tr>
+              <tr><td class="mono">public/favicon-512.png</td><td>512×512</td><td>PWA 启动屏 / 大尺寸</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>Designed for lizhifa · Code Prism FE</footer>
+    </div>
+  </body>
+</html>

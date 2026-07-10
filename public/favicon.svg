@@ -1,4 +1,77 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="32" height="32" fill="#0A0B0D"/>
-<path d="M26.6677 23.7149H8.38057V20.6496H5.33301V8.38159H26.6677V23.7149ZM8.38057 20.6496H23.6201V11.4482H8.38057V20.6496ZM16.0011 16.0021L13.8461 18.1705L11.6913 16.0021L13.8461 13.8337L16.0011 16.0021ZM22.0963 16.0008L19.9414 18.1691L17.7865 16.0008L19.9414 13.8324L22.0963 16.0008Z" fill="#32F08C"/>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 深色径向背景：从左上角微亮，到右下角接近纯黑 -->
+    <radialGradient id="bgGrad" cx="0.25" cy="0.2" r="1.1">
+      <stop offset="0" stop-color="#1a1a35"/>
+      <stop offset="0.55" stop-color="#0c0c1c"/>
+      <stop offset="1" stop-color="#04040c"/>
+    </radialGradient>
+
+    <!-- 主体渐变：青 → 紫 → 粉 -->
+    <linearGradient id="fgGrad" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+
+    <!-- 顶部高光，让背景有玻璃感 -->
+    <linearGradient id="topGloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 外发光 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 背景细微网格 pattern -->
+    <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    </pattern>
+
+    <!-- 渐变描边，给主符号外加一层"霓虹边" -->
+    <linearGradient id="strokeGrad" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="0.5" stop-color="#c084fc"/>
+      <stop offset="1" stop-color="#f9a8d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景圆角矩形 -->
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)"/>
+  <!-- 细微网格 -->
+  <rect width="64" height="64" rx="14" fill="url(#grid)"/>
+  <!-- 顶部高光 -->
+  <rect width="64" height="64" rx="14" fill="url(#topGloss)"/>
+
+  <!-- 内描边（细高亮边框） -->
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.5" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5"/>
+
+  <!-- 主符号：立体 F + 代码右尖括号 -->
+  <g filter="url(#glow)">
+    <!-- F 的主体：粗体几何 -->
+    <path d="M 19 14 L 19 50"
+          stroke="url(#strokeGrad)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M 19 14 L 41 14"
+          stroke="url(#strokeGrad)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M 19 30 L 35 30"
+          stroke="url(#strokeGrad)" stroke-width="5.5" stroke-linecap="round"/>
+
+    <!-- 内层渐变填充（让 F 有"实体感"） -->
+    <path d="M 19 14 L 19 50" stroke="url(#fgGrad)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 19 14 L 41 14" stroke="url(#fgGrad)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 19 30 L 35 30" stroke="url(#fgGrad)" stroke-width="3.2" stroke-linecap="round"/>
+
+    <!-- 代码右尖括号 > 强调"前端/代码"身份 -->
+    <path d="M 44 38 L 50 43 L 44 48"
+          stroke="url(#fgGrad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- 一个小亮点（强调高光，像晶面反射） -->
+    <circle cx="22" cy="17" r="1.4" fill="#ffffff" fill-opacity="0.9"/>
+  </g>
 </svg>
