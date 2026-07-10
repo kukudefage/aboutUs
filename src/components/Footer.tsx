@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Github, Twitter, Instagram, Mail } from 'lucide-react';
+import { Github, Twitter, Mail } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,10 +13,10 @@ export default function Footer() {
               to="/"
               className="font-display text-2xl font-medium text-ink-900 tracking-tight"
             >
-              墨<span className="text-ochre-500">.</span>白
+              码<span className="text-ochre-500">.</span>匠
             </Link>
             <p className="mt-3 text-ink-400 font-sans text-sm max-w-xs">
-              以极简之笔，书写有温度的设计。
+              前端开发者的技术分享空间，记录成长，分享思考。
             </p>
           </div>
 
@@ -37,14 +37,7 @@ export default function Footer() {
                 <Twitter className="w-5 h-5" strokeWidth={1.5} />
               </a>
               <a
-                href="#"
-                className="text-ink-500 hover:text-ochre-500 transition-colors duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" strokeWidth={1.5} />
-              </a>
-              <a
-                href="mailto:hello@example.com"
+                href="mailto:17151233210@163.com"
                 className="text-ink-500 hover:text-ochre-500 transition-colors duration-300"
                 aria-label="Email"
               >
@@ -53,7 +46,7 @@ export default function Footer() {
             </div>
 
             <p className="text-ink-400 font-sans text-xs">
-              © {currentYear} 墨白设计工作室. 保留所有权利.
+              © {currentYear} 码匠的技术博客. 保留所有权利.
             </p>
           </div>
         </div>

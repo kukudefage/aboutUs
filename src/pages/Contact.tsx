@@ -76,26 +76,6 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
-
-              <div className="pt-20 border-t border-cream-300/60">
-                <p className="font-sans text-xs text-ink-400 uppercase tracking-wider mb-4">
-                  关注我
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {['GitHub', 'Twitter', '掘金', '知乎', 'CSDN', 'SegmentFault'].map(
-                    (platform) => (
-                      <a
-                        key={platform}
-                        href="#"
-                        className="px-4 py-2 border border-cream-300 text-sm text-ink-600 hover:border-ochre-500 hover:text-ochre-500 transition-all duration-300"
-                        aria-label={platform}
-                      >
-                        {platform}
-                      </a>
-                    )
-                  )}
-                </div>
-              </div>
             </div>
           </div>
         </div>
