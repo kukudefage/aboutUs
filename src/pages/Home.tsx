@@ -261,21 +261,19 @@ export default function Home() {
               技术栈
             </span>
           </div>
-          <div className="marquee-container">
+          <div className="relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-950 to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-950 to-transparent z-10 pointer-events-none" />
-            <div className="marquee-content">
-              {[...techStack, ...techStack].map((tech, index) => (
+            <div className="flex animate-marquee-2">
+              {[...techStack, ...techStack, ...techStack, ...techStack].map((tech, index) => (
                 <div
                   key={index}
-                  className="marquee-item mr-6"
+                  className="flex items-center gap-3 px-6 py-3 mx-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group flex-shrink-0"
                 >
-                  <div className="flex items-center gap-3 px-6 py-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group">
-                    <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
-                    <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
-                      {tech.name}
-                    </span>
-                  </div>
+                  <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
+                  <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+                    {tech.name}
+                  </span>
                 </div>
               ))}
             </div>

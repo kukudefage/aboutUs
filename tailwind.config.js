@@ -63,6 +63,7 @@ export default {
         'marquee': 'marquee 20s linear infinite',
         'glow-pulse': 'glowPulse 2s ease-in-out infinite',
         'rotate-3d': 'rotate3d 10s ease-in-out infinite',
+        'marquee-2': 'marquee2 30s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -152,6 +153,10 @@ export default {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-25%)' },
         },
         glowPulse: {
           '0%, 100%': { boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)' },
