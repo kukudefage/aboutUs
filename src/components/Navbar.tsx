@@ -90,7 +90,7 @@ export default function Navbar() {
             isMobileMenuOpen ? 'max-h-64 mt-4' : 'max-h-0'
           }`}
         >
-          <ul className="flex flex-col gap-3 py-4 border-t border-dark-900/10 dark:border-white/10">
+          <ul className="flex flex-col gap-3 py-4 border-t border-dark-900/10 dark:border-white/10 bg-light-50/95 dark:bg-dark-950/95 backdrop-blur-xl">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <Link
