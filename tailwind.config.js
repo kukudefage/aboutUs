@@ -63,7 +63,7 @@ export default {
         'marquee': 'marquee 20s linear infinite',
         'glow-pulse': 'glowPulse 2s ease-in-out infinite',
         'rotate-3d': 'rotate3d 10s ease-in-out infinite',
-        'marquee-2': 'marquee2 30s linear infinite',
+        'marquee2': 'marquee2 30s linear infinite',
       },
       keyframes: {
         fadeIn: {

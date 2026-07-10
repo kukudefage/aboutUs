@@ -264,7 +264,14 @@ export default function Home() {
           <div className="relative overflow-hidden">
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-950 to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-950 to-transparent z-10 pointer-events-none" />
-            <div className="flex animate-marquee-2">
+            <div
+              className="flex"
+              style={{
+                animation: 'marquee2 30s linear infinite',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.animationPlayState = 'paused'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.animationPlayState = 'running'; }}
+            >
               {[...techStack, ...techStack, ...techStack, ...techStack].map((tech, index) => (
                 <div
                   key={index}
