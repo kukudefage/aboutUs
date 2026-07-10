@@ -30,38 +30,43 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-cream-100/90 backdrop-blur-md border-b border-cream-300/50 py-3'
-          : 'bg-transparent py-6'
+          ? 'glass-dark py-3'
+          : 'bg-transparent py-5'
       }`}
     >
       <div className="container px-6 md:px-8">
         <nav className="flex items-center justify-between">
           <Link
             to="/"
-            className="font-display text-2xl md:text-3xl font-medium text-ink-900 tracking-tight hover:text-ochre-500 transition-colors duration-300"
+            className="font-display text-2xl font-bold tracking-tight transition-all duration-300 hover:scale-105"
           >
-            智<span className="text-ochre-500">.</span>发
+            <span className="gradient-text-animated">智</span>
+            <span className="text-white/30">.</span>
+            <span className="gradient-text-animated">发</span>
           </Link>
 
           <ul className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <li key={link.path}>
+              <li key={link.path} className="group relative">
                 <Link
                   to={link.path}
-                  className={`link-underline font-sans text-sm tracking-wide transition-colors duration-300 ${
+                  className={`font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
                     location.pathname === link.path
-                      ? 'text-ochre-500'
-                      : 'text-ink-700 hover:text-ink-900'
+                      ? 'text-white'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   {link.label}
                 </Link>
+                {location.pathname === link.path && (
+                  <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-gradient-to-r from-neon-cyan to-neon-purple rounded-full" />
+                )}
               </li>
             ))}
           </ul>
 
           <button
-            className="md:hidden p-2 -mr-2 text-ink-900"
+            className="md:hidden p-2 -mr-2 text-white/80 hover:text-white transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="切换菜单"
           >
@@ -78,15 +83,15 @@ export default function Navbar() {
             isMobileMenuOpen ? 'max-h-64 mt-4' : 'max-h-0'
           }`}
         >
-          <ul className="flex flex-col gap-4 py-4 border-t border-cream-300/50">
+          <ul className="flex flex-col gap-3 py-4 border-t border-white/10">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className={`block py-2 font-sans text-base transition-colors duration-300 ${
+                  className={`block py-2 px-4 rounded-lg font-sans text-base transition-all duration-300 ${
                     location.pathname === link.path
-                      ? 'text-ochre-500'
-                      : 'text-ink-700 hover:text-ink-900'
+                      ? 'text-white bg-white/5'
+                      : 'text-white/50 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {link.label}

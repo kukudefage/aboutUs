@@ -32,42 +32,53 @@ export default function Works() {
       : sortedArticles.filter((a) => a.category === activeCategory);
 
   return (
-    <div className="pt-32">
-      <section className="px-6 md:px-8 pb-16 md:pb-20">
+    <div className="pt-32 relative">
+      {/* 背景光效 */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 -right-1/4 w-[500px] h-[500px] rounded-full bg-neon-purple/8 blur-[120px] animate-pulse-glow" />
+        <div className="absolute bottom-1/4 -left-1/4 w-[400px] h-[400px] rounded-full bg-neon-cyan/8 blur-[100px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      </div>
+
+      <section className="px-6 md:px-8 pb-16 md:pb-20 relative z-10">
         <div className="container">
           <div
             ref={headerRef}
             className="reveal max-w-3xl mx-auto text-center"
           >
-            <span className="font-sans text-xs tracking-[0.2em] text-ochre-500 uppercase">
-              技术文章
-            </span>
-            <h1 className="font-display text-4xl md:text-6xl font-medium text-ink-900 mt-4 mb-6 text-balance">
-              每周一篇
-              <span className="font-display-italic text-ochre-500"> 技术 </span>
-              分享
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <span className="w-8 h-px bg-gradient-to-r from-transparent to-neon-cyan" />
+              <span className="font-mono text-xs tracking-[0.2em] text-neon-cyan uppercase">
+                技术文章
+              </span>
+              <span className="w-8 h-px bg-gradient-to-l from-transparent to-neon-cyan" />
+            </div>
+            <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 text-balance">
+              <span className="text-white">每周一篇</span>
+              <span className="gradient-text-animated"> 技术 </span>
+              <span className="text-white">分享</span>
             </h1>
-            <p className="text-ink-500 text-lg leading-relaxed">
+            <p className="text-white/40 text-lg leading-relaxed">
               从 2023 年开始坚持每周更新一篇技术文章，
               涵盖前端开发、工程化、性能优化等领域。
-              共 <span className="text-ochre-500 font-medium">{articles.length}</span> 篇，持续更新中。
+              共 <span className="gradient-text-2 font-semibold">{articles.length}</span> 篇，持续更新中。
             </p>
           </div>
         </div>
       </section>
 
-      <section className="px-6 md:px-8 pb-20 md:pb-28">
+      <section className="px-6 md:px-8 pb-20 md:pb-28 relative z-10">
         <div className="container">
           <div ref={listRef} className="reveal">
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {/* 分类按钮 */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
               {allCategories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`px-5 py-2 font-sans text-sm transition-all duration-300 ${
+                  className={`px-5 py-2 rounded-lg font-sans text-sm font-medium transition-all duration-300 ${
                     activeCategory === category
-                      ? 'bg-ink-900 text-cream-100'
-                      : 'bg-transparent text-ink-500 hover:text-ink-900 border border-cream-300 hover:border-ink-900/30'
+                      ? 'bg-gradient-to-r from-neon-purple to-neon-cyan text-white shadow-glow-sm'
+                      : 'bg-white/5 text-white/50 hover:text-white hover:bg-white/10 border border-white/10'
                   }`}
                 >
                   {category}
@@ -75,7 +86,8 @@ export default function Works() {
               ))}
             </div>
 
-            <div className="max-w-3xl mx-auto space-y-2">
+            {/* 文章列表 */}
+            <div className="max-w-3xl mx-auto space-y-1">
               {filteredArticles.map((article, index) => (
                 <ArticleCard key={article.id} article={article} index={index} />
               ))}
@@ -83,14 +95,14 @@ export default function Works() {
 
             {filteredArticles.length === 0 && (
               <div className="text-center py-20">
-                <p className="text-ink-400 font-sans">
+                <p className="text-white/30 font-sans">
                   该分类下暂无文章
                 </p>
               </div>
             )}
 
             {filteredArticles.length > 0 && (
-              <p className="text-center font-sans text-sm text-ink-400 mt-10">
+              <p className="text-center font-mono text-sm text-white/30 mt-10">
                 共 {filteredArticles.length} 篇文章
               </p>
             )}

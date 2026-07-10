@@ -14,33 +14,33 @@ export default function ArticleCard({ article, index = 0 }: ArticleCardProps) {
     <article
       ref={ref}
       className="reveal group cursor-pointer"
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${Math.min(index * 50, 300)}ms` }}
     >
-      <div className="py-6 border-b border-cream-300/60 group-hover:border-ochre-500/30 transition-colors duration-500">
+      <div className="py-5 px-4 -mx-4 rounded-xl border-b border-white/5 group-hover:border-transparent group-hover:bg-white/[0.03] transition-all duration-300">
         <div className="flex items-start justify-between gap-6">
           <div className="flex-1">
-            <div className="flex items-center gap-4 mb-3">
-              <span className="font-sans text-xs tracking-wider text-ink-400 uppercase">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="font-mono text-xs tracking-wider text-white/30">
                 {article.date}
               </span>
-              <span className="font-sans text-xs text-ochre-500/80 bg-ochre-50 px-2.5 py-0.5 rounded-full">
+              <span className="font-mono text-xs text-neon-cyan/80 bg-neon-cyan/10 px-2.5 py-0.5 rounded-full border border-neon-cyan/20">
                 {article.category}
               </span>
             </div>
 
-            <h3 className="font-display text-xl md:text-2xl font-medium text-ink-900 group-hover:text-ochre-600 transition-colors duration-300 mb-2 leading-snug">
+            <h3 className="font-display text-lg md:text-xl font-semibold text-white/90 group-hover:text-white group-hover:gradient-text transition-all duration-300 mb-2 leading-snug">
               {article.title}
             </h3>
 
-            <p className="text-ink-500 text-base leading-relaxed line-clamp-2">
+            <p className="text-white/40 text-sm leading-relaxed line-clamp-2">
               {article.excerpt}
             </p>
 
-            <div className="mt-4 flex items-center gap-2 font-sans text-sm text-ink-400">
+            <div className="mt-3 flex items-center gap-2 font-mono text-xs text-white/30">
               <span>{article.readTime}阅读</span>
-              <span className="flex items-center gap-1 text-ochre-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+              <span className="flex items-center gap-1 text-neon-cyan opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                 阅读全文
-                <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+                <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
               </span>
             </div>
           </div>
