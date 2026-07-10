@@ -258,8 +258,8 @@ export default function Home() {
             </span>
           </div>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-light-50 to-transparent dark:from-dark-950 z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-light-50 to-transparent dark:from-dark-950 z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-light-50 to-transparent dark:from-dark-950/98 z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-light-50 to-transparent dark:from-dark-950/98 z-10 pointer-events-none" />
             <div
               className="flex"
               style={{
