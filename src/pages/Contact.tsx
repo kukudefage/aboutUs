@@ -123,18 +123,16 @@ export default function Contact() {
                 <p className="font-sans text-xs text-ink-400 uppercase tracking-wider mb-4">
                   关注我
                 </p>
-                <div className="flex gap-4">
-                  {['GitHub', 'Twitter', 'Instagram', 'Dribbble'].map(
+                <div className="flex flex-wrap gap-3">
+                  {['GitHub', 'Twitter', '掘金', '知乎', 'CSDN', 'SegmentFault'].map(
                     (platform) => (
                       <a
                         key={platform}
                         href="#"
-                        className="w-10 h-10 rounded-full border border-cream-300 flex items-center justify-center text-ink-500 hover:border-ochre-500 hover:text-ochre-500 transition-all duration-300"
+                        className="px-4 py-2 border border-cream-300 text-sm text-ink-600 hover:border-ochre-500 hover:text-ochre-500 transition-all duration-300"
                         aria-label={platform}
                       >
-                        <span className="font-sans text-xs">
-                          {platform.charAt(0)}
-                        </span>
+                        {platform}
                       </a>
                     )
                   )}
