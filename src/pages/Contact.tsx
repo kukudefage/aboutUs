@@ -44,7 +44,7 @@ export default function Contact() {
               <span className="w-8 h-px bg-gradient-to-l from-transparent to-neon-cyan" />
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 text-balance">
-              <span className="text-white">有技术话题？</span>
+              <span className="text-dark-900 dark:text-white">有技术话题？</span>
               <span className="gradient-text-animated"> 一起聊聊</span>
             </h1>
           </div>
@@ -62,7 +62,7 @@ export default function Contact() {
                     联系方式
                   </span>
                 </div>
-                <h2 className="font-display text-2xl font-bold text-white">
+                <h2 className="font-display text-2xl font-bold text-dark-900 dark:text-white">
                   保持联系
                 </h2>
               </div>
@@ -80,18 +80,18 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <p className="font-mono text-xs text-white/40 uppercase tracking-wider mb-1">
+                      <p className="font-mono text-xs text-dark-900/40 dark:text-white/40 uppercase tracking-wider mb-1">
                         {item.title}
                       </p>
                       {item.link ? (
                         <a
                           href={item.link}
-                          className="text-white group-hover:gradient-text transition-all duration-300"
+                          className="text-dark-900 dark:text-white group-hover:gradient-text transition-all duration-300"
                         >
                           {item.content}
                         </a>
                       ) : (
-                        <p className="text-white">{item.content}</p>
+                        <p className="text-dark-900 dark:text-white">{item.content}</p>
                       )}
                     </div>
                   </div>

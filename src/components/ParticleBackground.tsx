@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 interface Particle {
   x: number;
@@ -19,6 +20,7 @@ export default function ParticleBackground({ count = 60 }: ParticleBackgroundPro
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const animationRef = useRef<number>();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,12 +29,25 @@ export default function ParticleBackground({ count = 60 }: ParticleBackgroundPro
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const colors = [
+    const isDark = theme === 'dark';
+
+    const darkColors = [
       'rgba(34, 211, 238,',
       'rgba(168, 85, 247,',
       'rgba(236, 72, 153,',
       'rgba(52, 211, 153,',
     ];
+
+    const lightColors = [
+      'rgba(59, 130, 246,',
+      'rgba(139, 92, 246,',
+      'rgba(236, 72, 153,',
+      'rgba(16, 185, 129,',
+    ];
+
+    const colors = isDark ? darkColors : lightColors;
+    const lineColor = isDark ? 'rgba(168, 85, 247,' : 'rgba(139, 92, 246,';
+    const baseOpacity = isDark ? 1 : 0.7;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -48,7 +63,7 @@ export default function ParticleBackground({ count = 60 }: ParticleBackgroundPro
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
           size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.3 + 0.1,
+          opacity: (Math.random() * 0.3 + 0.1) * baseOpacity,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -97,11 +112,11 @@ export default function ParticleBackground({ count = 60 }: ParticleBackgroundPro
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 120) {
-            const opacity = (1 - dist / 120) * 0.15;
+            const opacity = (1 - dist / 120) * 0.15 * baseOpacity;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${opacity})`;
+            ctx.strokeStyle = lineColor + opacity + ')';
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -131,7 +146,7 @@ export default function ParticleBackground({ count = 60 }: ParticleBackgroundPro
       }
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [count]);
+  }, [count, theme]);
 
   return (
     <canvas

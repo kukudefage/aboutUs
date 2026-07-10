@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
@@ -7,6 +8,7 @@ export default function CursorGlow() {
   const currentRef = useRef({ x: 0, y: 0 });
   const coreRef2 = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number>();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,24 +43,39 @@ export default function CursorGlow() {
     };
   }, []);
 
+  const isDark = theme === 'dark';
+
+  const glowBackground = isDark
+    ? 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(34, 211, 238, 0.1) 35%, transparent 70%)'
+    : 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 35%, transparent 70%)';
+
+  const coreBackground = isDark
+    ? 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, rgba(168, 85, 247, 0.1) 40%, transparent 70%)'
+    : 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(139, 92, 246, 0.08) 40%, transparent 70%)';
+
+  const glowOpacity = isDark ? 0.6 : 0.4;
+  const coreOpacity = isDark ? 0.8 : 0.5;
+
   return (
     <>
       <div
         ref={glowRef}
-        className="fixed top-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none z-[1] opacity-60"
+        className="fixed top-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none z-[1]"
         style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(34, 211, 238, 0.1) 35%, transparent 70%)',
+          background: glowBackground,
           filter: 'blur(30px)',
-          mixBlendMode: 'screen',
+          mixBlendMode: isDark ? 'screen' : 'multiply',
+          opacity: glowOpacity,
         }}
       />
       <div
         ref={coreRef}
-        className="fixed top-0 left-0 w-[200px] h-[200px] rounded-full pointer-events-none z-[1] opacity-80"
+        className="fixed top-0 left-0 w-[200px] h-[200px] rounded-full pointer-events-none z-[1]"
         style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, rgba(168, 85, 247, 0.1) 40%, transparent 70%)',
+          background: coreBackground,
           filter: 'blur(15px)',
-          mixBlendMode: 'screen',
+          mixBlendMode: isDark ? 'screen' : 'multiply',
+          opacity: coreOpacity,
         }}
       />
     </>

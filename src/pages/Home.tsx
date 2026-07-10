@@ -101,11 +101,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center px-6 md:px-8 overflow-hidden">
         {/* 网格背景 */}
         <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
+          className="absolute inset-0 opacity-[0.02] bg-grid-60"
         />
 
         {/* 浮动装饰元素 */}
@@ -123,7 +119,7 @@ export default function Home() {
             style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
           >
             <Terminal className="w-3.5 h-3.5 text-neon-green" strokeWidth={2} />
-            <span className="font-mono text-xs text-white/60 tracking-wider">
+            <span className="font-mono text-xs text-dark-900/60 dark:text-white/60 tracking-wider">
               前端开发 · {typewriterText}
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
@@ -133,13 +129,13 @@ export default function Home() {
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] mb-8 text-balance opacity-0 animate-fade-in-up"
             style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
           >
-            <span className="text-white">用代码，</span>
+            <span className="text-dark-900 dark:text-white">用代码，</span>
             <br />
             <GlitchText className="gradient-text-animated text-glow-rainbow">记录成长</GlitchText>
           </h1>
 
           <p
-            className="text-lg md:text-xl text-white/50 leading-relaxed max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up"
+            className="text-lg md:text-xl text-dark-900/50 dark:text-white/50 leading-relaxed max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up"
             style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
           >
             你好，我是智发，一名前端工程师。
@@ -187,30 +183,30 @@ export default function Home() {
               <div ref={statsRef} className={`text-3xl md:text-4xl font-display font-bold ${stats[0].color}`}>
                 <span ref={articleCount.ref}>{articleCount.count}</span>+
               </div>
-              <div className="text-white/30 text-xs md:text-sm mt-1 font-mono">技术文章</div>
+              <div className="text-dark-900/30 dark:text-white/30 text-xs md:text-sm mt-1 font-mono">技术文章</div>
             </div>
             <div className="text-center">
               <div className={`text-3xl md:text-4xl font-display font-bold ${stats[1].color}`}>
                 <span ref={projectCount.ref}>{projectCount.count}</span>+
               </div>
-              <div className="text-white/30 text-xs md:text-sm mt-1 font-mono">开源项目</div>
+              <div className="text-dark-900/30 dark:text-white/30 text-xs md:text-sm mt-1 font-mono">开源项目</div>
             </div>
             <div className="text-center">
               <div className={`text-3xl md:text-4xl font-display font-bold ${stats[2].color}`}>
                 <span ref={codeCount.ref}>{codeCount.count}</span>k+
               </div>
-              <div className="text-white/30 text-xs md:text-sm mt-1 font-mono">代码行数</div>
+              <div className="text-dark-900/30 dark:text-white/30 text-xs md:text-sm mt-1 font-mono">代码行数</div>
             </div>
           </div>
         </div>
 
         {/* 向下滚动提示 */}
         <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20 opacity-0 animate-fade-in"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-dark-900/20 dark:text-white/20 opacity-0 animate-fade-in"
           style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}
         >
           <span className="font-mono text-xs tracking-widest">向下滚动</span>
-          <div className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5">
+          <div className="w-5 h-8 rounded-full border border-dark-900/20 dark:border-white/20 flex justify-center pt-1.5">
             <div className="w-1 h-2 rounded-full bg-neon-cyan/50 animate-bounce" />
           </div>
         </div>
@@ -228,16 +224,16 @@ export default function Home() {
                     最新文章
                   </span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-dark-900 dark:text-white">
                   最新技术分享
                 </h2>
-                <p className="font-sans text-sm text-white/40 mt-2">
+                <p className="font-sans text-sm text-dark-900/40 dark:text-white/40 mt-2">
                   每周一篇，持续更新中 · 共 {articles.length} 篇
                 </p>
               </div>
               <Link
                 to="/works"
-                className="hidden md:flex items-center gap-2 font-sans text-sm text-white/50 hover:text-white transition-colors duration-300 link-underline"
+                className="hidden md:flex items-center gap-2 font-sans text-sm text-dark-900/50 dark:text-white/50 hover:text-dark-900 dark:hover:text-white transition-colors duration-300 link-underline"
               >
                 查看全部
                 <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
@@ -257,13 +253,13 @@ export default function Home() {
       <section className="py-16 relative z-10 overflow-hidden">
         <div ref={techStackRef} className="reveal">
           <div className="text-center mb-10">
-            <span className="font-mono text-xs tracking-[0.2em] text-white/30 uppercase">
+            <span className="font-mono text-xs tracking-[0.2em] text-dark-900/30 dark:text-white/30 uppercase">
               技术栈
             </span>
           </div>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-950 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-950 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-light-50 to-transparent dark:from-dark-950 z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-light-50 to-transparent dark:from-dark-950 z-10 pointer-events-none" />
             <div
               className="flex"
               style={{
@@ -278,7 +274,7 @@ export default function Home() {
                   className="flex items-center gap-3 px-6 py-3 mx-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group flex-shrink-0"
                 >
                   <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
-                  <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+                  <span className="font-mono text-sm text-dark-900/60 dark:text-white/60 group-hover:text-dark-900 dark:group-hover:text-white transition-colors duration-300 whitespace-nowrap">
                     {tech.name}
                   </span>
                 </div>
@@ -300,10 +296,10 @@ export default function Home() {
                 </span>
                 <span className="w-8 h-px bg-gradient-to-l from-transparent to-neon-purple" />
               </div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-dark-900 dark:text-white">
                 探索技术领域
               </h2>
-              <p className="text-white/40 mt-4 max-w-lg mx-auto">
+              <p className="text-dark-900/40 dark:text-white/40 mt-4 max-w-lg mx-auto">
                 覆盖前端开发全栈技术栈，
                 从框架原理到工程实践，助你快速成长。
               </p>
@@ -321,10 +317,10 @@ export default function Home() {
                       <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${cat.glow}`}>
                         <cat.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
                       </div>
-                      <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:gradient-text transition-all duration-300">
+                      <h3 className="font-display text-xl font-bold text-dark-900 dark:text-white mb-2 group-hover:gradient-text transition-all duration-300">
                         {cat.title}
                       </h3>
-                      <p className="text-white/40 text-sm">
+                      <p className="text-dark-900/40 dark:text-white/40 text-sm">
                         {cat.desc}
                       </p>
                       <div className="mt-4 flex items-center gap-1 text-neon-cyan/0 group-hover:text-neon-cyan transition-all duration-300">
@@ -362,12 +358,12 @@ export default function Home() {
                       联系我
                     </span>
                   </div>
-                  <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-6 text-balance">
+                  <h2 className="font-display text-3xl md:text-5xl font-bold text-dark-900 dark:text-white mb-6 text-balance">
                     有技术话题？
                     <br />
                     <GlitchText className="gradient-text-animated text-glow-rainbow">一起聊聊</GlitchText>
                   </h2>
-                  <p className="text-white/40 text-lg mb-10">
+                  <p className="text-dark-900/40 dark:text-white/40 text-lg mb-10">
                     无论是技术交流、项目合作，还是单纯想探讨前端趋势，
                     我都很乐意和你交流。
                   </p>

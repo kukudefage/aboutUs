@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { path: '/', label: '首页' },
@@ -41,7 +42,7 @@ export default function Navbar() {
             className="font-display text-2xl font-bold tracking-tight transition-all duration-300 hover:scale-105"
           >
             <span className="gradient-text-animated">智</span>
-            <span className="text-white/30">.</span>
+            <span className="text-dark-900/20 dark:text-white/30">.</span>
             <span className="gradient-text-animated">发</span>
           </Link>
 
@@ -52,8 +53,8 @@ export default function Navbar() {
                   to={link.path}
                   className={`font-sans text-sm font-medium tracking-wide transition-all duration-300 ${
                     location.pathname === link.path
-                      ? 'text-white'
-                      : 'text-white/50 hover:text-white'
+                      ? 'text-dark-900 dark:text-white'
+                      : 'text-dark-900/50 dark:text-white/50 hover:text-dark-900 dark:hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -63,19 +64,25 @@ export default function Navbar() {
                 )}
               </li>
             ))}
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
 
-          <button
-            className="md:hidden p-2 -mr-2 text-white/80 hover:text-white transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="切换菜单"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" strokeWidth={1.5} />
-            ) : (
-              <Menu className="w-6 h-6" strokeWidth={1.5} />
-            )}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              className="p-2 -mr-2 text-dark-900/80 dark:text-white/80 hover:text-dark-900 dark:hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="切换菜单"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" strokeWidth={1.5} />
+              ) : (
+                <Menu className="w-6 h-6" strokeWidth={1.5} />
+              )}
+            </button>
+          </div>
         </nav>
 
         <div
@@ -83,15 +90,15 @@ export default function Navbar() {
             isMobileMenuOpen ? 'max-h-64 mt-4' : 'max-h-0'
           }`}
         >
-          <ul className="flex flex-col gap-3 py-4 border-t border-white/10">
+          <ul className="flex flex-col gap-3 py-4 border-t border-dark-900/10 dark:border-white/10">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <Link
                   to={link.path}
                   className={`block py-2 px-4 rounded-lg font-sans text-base transition-all duration-300 ${
                     location.pathname === link.path
-                      ? 'text-white bg-white/5'
-                      : 'text-white/50 hover:text-white hover:bg-white/5'
+                      ? 'text-dark-900 dark:text-white bg-dark-900/5 dark:bg-white/5'
+                      : 'text-dark-900/50 dark:text-white/50 hover:text-dark-900 dark:hover:text-white hover:bg-dark-900/5 dark:hover:bg-white/5'
                   }`}
                 >
                   {link.label}

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 interface Star {
   x: number;
@@ -28,6 +29,7 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
   const starsRef = useRef<Star[]>([]);
   const meteorsRef = useRef<Meteor[]>([]);
   const timeRef = useRef(0);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -35,6 +37,8 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const isDark = theme === 'dark';
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -49,7 +53,7 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           size: Math.random() * 2 + 0.5,
-          opacity: Math.random() * 0.5 + 0.3,
+          opacity: isDark ? Math.random() * 0.5 + 0.3 : Math.random() * 0.4 + 0.4,
           twinkleSpeed: Math.random() * 2 + 1,
           twinkleOffset: Math.random() * Math.PI * 2,
         });
@@ -97,9 +101,15 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
           star.y,
           star.size * 2
         );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
-        gradient.addColorStop(0.5, `rgba(168, 139, 250, ${opacity * 0.5})`);
-        gradient.addColorStop(1, 'rgba(34, 211, 238, 0)');
+        if (isDark) {
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+          gradient.addColorStop(0.5, `rgba(168, 139, 250, ${opacity * 0.5})`);
+          gradient.addColorStop(1, 'rgba(34, 211, 238, 0)');
+        } else {
+          gradient.addColorStop(0, `rgba(99, 102, 241, ${opacity})`);
+          gradient.addColorStop(0.5, `rgba(139, 92, 246, ${opacity * 0.4})`);
+          gradient.addColorStop(1, 'rgba(236, 72, 153, 0)');
+        }
 
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size * 2, 0, Math.PI * 2);
@@ -125,9 +135,15 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
           const tailY = meteor.y - Math.sin(radians) * meteor.length;
 
           const gradient = ctx.createLinearGradient(tailX, tailY, meteor.x, meteor.y);
-          gradient.addColorStop(0, 'rgba(34, 211, 238, 0)');
-          gradient.addColorStop(0.5, `rgba(168, 85, 247, ${meteor.opacity * 0.5})`);
-          gradient.addColorStop(1, `rgba(236, 72, 153, ${meteor.opacity})`);
+          if (isDark) {
+            gradient.addColorStop(0, 'rgba(34, 211, 238, 0)');
+            gradient.addColorStop(0.5, `rgba(168, 85, 247, ${meteor.opacity * 0.5})`);
+            gradient.addColorStop(1, `rgba(236, 72, 153, ${meteor.opacity})`);
+          } else {
+            gradient.addColorStop(0, 'rgba(139, 92, 246, 0)');
+            gradient.addColorStop(0.5, `rgba(236, 72, 153, ${meteor.opacity * 0.4})`);
+            gradient.addColorStop(1, `rgba(59, 130, 246, ${meteor.opacity * 0.8})`);
+          }
 
           ctx.beginPath();
           ctx.moveTo(tailX, tailY);
@@ -145,9 +161,15 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
             meteor.y,
             4
           );
-          headGradient.addColorStop(0, `rgba(255, 255, 255, ${meteor.opacity})`);
-          headGradient.addColorStop(0.5, `rgba(236, 72, 153, ${meteor.opacity * 0.5})`);
-          headGradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+          if (isDark) {
+            headGradient.addColorStop(0, `rgba(255, 255, 255, ${meteor.opacity})`);
+            headGradient.addColorStop(0.5, `rgba(236, 72, 153, ${meteor.opacity * 0.5})`);
+            headGradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+          } else {
+            headGradient.addColorStop(0, `rgba(255, 255, 255, ${meteor.opacity * 0.9})`);
+            headGradient.addColorStop(0.5, `rgba(59, 130, 246, ${meteor.opacity * 0.4})`);
+            headGradient.addColorStop(1, 'rgba(236, 72, 153, 0)');
+          }
 
           ctx.beginPath();
           ctx.arc(meteor.x, meteor.y, 4, 0, Math.PI * 2);
@@ -167,7 +189,7 @@ export default function StarryBackground({ starCount = 100, meteorCount = 3 }: S
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationId);
     };
-  }, [starCount, meteorCount]);
+  }, [starCount, meteorCount, theme]);
 
   return (
     <canvas

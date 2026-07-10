@@ -53,11 +53,11 @@ export default function Works() {
               <span className="w-8 h-px bg-gradient-to-l from-transparent to-neon-cyan" />
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-6 text-balance">
-              <span className="text-white">每周一篇</span>
+              <span className="text-dark-900 dark:text-white">每周一篇</span>
               <span className="gradient-text-animated"> 技术 </span>
-              <span className="text-white">分享</span>
+              <span className="text-dark-900 dark:text-white">分享</span>
             </h1>
-            <p className="text-white/40 text-lg leading-relaxed">
+            <p className="text-dark-900/40 dark:text-white/40 text-lg leading-relaxed">
               从 2023 年开始坚持每周更新一篇技术文章，
               涵盖前端开发、工程化、性能优化等领域。
               共 <span className="gradient-text-2 font-semibold">{articles.length}</span> 篇，持续更新中。
@@ -78,7 +78,7 @@ export default function Works() {
                   className={`px-5 py-2 rounded-lg font-sans text-sm font-medium transition-all duration-300 ${
                     activeCategory === category
                       ? 'bg-gradient-to-r from-neon-purple to-neon-cyan text-white shadow-glow-sm'
-                      : 'bg-white/5 text-white/50 hover:text-white hover:bg-white/10 border border-white/10'
+                      : 'bg-dark-900/5 dark:bg-white/5 text-dark-900/50 dark:text-white/50 hover:text-dark-900 dark:hover:text-white hover:bg-dark-900/10 dark:hover:bg-white/10 border border-dark-900/10 dark:border-white/10'
                   }`}
                 >
                   {category}
@@ -95,14 +95,14 @@ export default function Works() {
 
             {filteredArticles.length === 0 && (
               <div className="text-center py-20">
-                <p className="text-white/30 font-sans">
+                <p className="text-dark-900/30 dark:text-white/30 font-sans">
                   该分类下暂无文章
                 </p>
               </div>
             )}
 
             {filteredArticles.length > 0 && (
-              <p className="text-center font-mono text-sm text-white/30 mt-10">
+              <p className="text-center font-mono text-sm text-dark-900/30 dark:text-white/30 mt-10">
                 共 {filteredArticles.length} 篇文章
               </p>
             )}
