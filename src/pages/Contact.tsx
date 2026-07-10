@@ -43,13 +43,13 @@ export default function Contact() {
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div ref={infoRef} className="reveal">
-              <div className="text-center mb-12">
+              <div className="text-left mb-12">
                 <h2 className="font-display text-2xl font-medium text-ink-900 mb-6">
                   联系方式
                 </h2>
               </div>
 
-              <div className="space-y-6 flex flex-col items-center">
+              <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-ochre-50 flex items-center justify-center flex-shrink-0">
@@ -77,11 +77,11 @@ export default function Contact() {
                 ))}
               </div>
 
-              <div className="pt-12 border-t border-cream-300/60 text-center">
+              <div className="pt-12 border-t border-cream-300/60">
                 <p className="font-sans text-xs text-ink-400 uppercase tracking-wider mb-4">
                   关注我
                 </p>
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap gap-3">
                   {['GitHub', 'Twitter', '掘金', '知乎', 'CSDN', 'SegmentFault'].map(
                     (platform) => (
                       <a
