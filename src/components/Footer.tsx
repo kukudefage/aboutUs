@@ -23,14 +23,14 @@ export default function Footer() {
           <div className="flex flex-col items-start md:items-end gap-4">
             <div className="flex items-center gap-5">
               <a
-                href="#"
+                href="https://github.com/kukudefage"
                 className="text-ink-500 hover:text-ochre-500 transition-colors duration-300"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" strokeWidth={1.5} />
               </a>
               <a
-                href="#"
+                href="https://x.com/lzhf154822"
                 className="text-ink-500 hover:text-ochre-500 transition-colors duration-300"
                 aria-label="Twitter"
               >
