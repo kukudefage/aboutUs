@@ -77,7 +77,7 @@ export default function Contact() {
                 ))}
               </div>
 
-              <div className="pt-12 border-t border-cream-300/60">
+              <div className="pt-20 border-t border-cream-300/60">
                 <p className="font-sans text-xs text-ink-400 uppercase tracking-wider mb-4">
                   关注我
                 </p>
