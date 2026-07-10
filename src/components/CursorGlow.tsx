@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react';
 
 export default function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
-  const trailRef = useRef<HTMLDivElement>(null);
+  const coreRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const currentRef = useRef({ x: 0, y: 0 });
+  const coreRef2 = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number>();
 
   useEffect(() => {
@@ -13,16 +14,17 @@ export default function CursorGlow() {
     };
 
     const animate = () => {
-      currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * 0.1;
-      currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * 0.1;
+      currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * 0.12;
+      currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * 0.12;
+
+      coreRef2.current.x += (mouseRef.current.x - coreRef2.current.x) * 0.2;
+      coreRef2.current.y += (mouseRef.current.y - coreRef2.current.y) * 0.2;
 
       if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${currentRef.current.x - 300}px, ${currentRef.current.y - 300}px)`;
+        glowRef.current.style.transform = `translate(${currentRef.current.x - 350}px, ${currentRef.current.y - 350}px)`;
       }
-      if (trailRef.current) {
-        const trailX = currentRef.current.x + (mouseRef.current.x - currentRef.current.x) * 0.5;
-        const trailY = currentRef.current.y + (mouseRef.current.y - currentRef.current.y) * 0.5;
-        trailRef.current.style.transform = `translate(${trailX - 200}px, ${trailY - 200}px)`;
+      if (coreRef.current) {
+        coreRef.current.style.transform = `translate(${coreRef2.current.x - 100}px, ${coreRef2.current.y - 100}px)`;
       }
 
       animationRef.current = requestAnimationFrame(animate);
@@ -43,18 +45,20 @@ export default function CursorGlow() {
     <>
       <div
         ref={glowRef}
-        className="fixed top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-0 opacity-30"
+        className="fixed top-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none z-[1] opacity-60"
         style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(34, 211, 238, 0.05) 40%, transparent 70%)',
-          filter: 'blur(40px)',
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(34, 211, 238, 0.1) 35%, transparent 70%)',
+          filter: 'blur(30px)',
+          mixBlendMode: 'screen',
         }}
       />
       <div
-        ref={trailRef}
-        className="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-0 opacity-20"
+        ref={coreRef}
+        className="fixed top-0 left-0 w-[200px] h-[200px] rounded-full pointer-events-none z-[1] opacity-80"
         style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
-          filter: 'blur(30px)',
+          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, rgba(168, 85, 247, 0.1) 40%, transparent 70%)',
+          filter: 'blur(15px)',
+          mixBlendMode: 'screen',
         }}
       />
     </>
