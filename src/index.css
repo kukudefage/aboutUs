@@ -144,6 +144,12 @@
   .text-glow-purple {
     text-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
   }
+  .text-glow-pink {
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+  }
+  .text-glow-rainbow {
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.4), 0 0 40px rgba(168, 85, 247, 0.3), 0 0 60px rgba(236, 72, 153, 0.2);
+  }
 
   /* 光效阴影 */
   .shadow-glow-cyan {
@@ -152,8 +158,14 @@
   .shadow-glow-purple {
     box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
   }
+  .shadow-glow-pink {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.15);
+  }
   .shadow-glow-sm {
     box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+  }
+  .shadow-glow-rainbow {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2), 0 0 40px rgba(168, 85, 247, 0.15), 0 0 60px rgba(236, 72, 153, 0.1);
   }
 
   /* 闪烁光标 */
@@ -167,5 +179,110 @@
     background: linear-gradient(-45deg, #0d0d14, #12121c, #1a1a28, #0d0d14);
     background-size: 400% 400%;
     animation: gradientShift 12s ease infinite;
+  }
+
+  /* 极光背景 */
+  .aurora-bg {
+    background: linear-gradient(125deg, #0d0d14 0%, #1a1a28 25%, #0d0d14 50%, #1a1a28 75%, #0d0d14 100%);
+    background-size: 400% 400%;
+    animation: aurora 15s ease infinite;
+  }
+
+  /* 扫描线效果 */
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(34, 211, 238, 0.02) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  /* 噪点纹理 */
+  .noise {
+    position: relative;
+  }
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* 3D 透视容器 */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* 跑马灯文字 */
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  .marquee-content {
+    display: inline-flex;
+    gap: 1.5rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+
+  /* 玻璃态增强 */
+  .glass-strong {
+    @apply backdrop-blur-2xl bg-white/[0.08] border border-white/[0.15];
+  }
+
+  /* 霓虹边框 */
+  .neon-border {
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.1), inset 0 0 15px rgba(34, 211, 238, 0.05);
+  }
+
+  /* 渐变描边文字 */
+  .gradient-stroke {
+    -webkit-text-stroke: 1px transparent;
+    background: linear-gradient(135deg, #22d3ee, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 悬停上浮效果 */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
+  }
+
+  /* 背景网格 */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-grid-fade {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
   }
 }

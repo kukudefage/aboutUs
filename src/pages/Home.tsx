@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, Code2, Rocket, BarChart3, Shield, Terminal, Sparkles, Zap } from 'lucide-react';
+import { ArrowDown, ArrowRight, Code2, Rocket, BarChart3, Shield, Terminal, Sparkles, Zap, Code, Cpu, Database, Globe } from 'lucide-react';
 import ArticleCard from '@/components/ArticleCard';
 import ParticleBackground from '@/components/ParticleBackground';
 import CursorGlow from '@/components/CursorGlow';
 import TiltCard from '@/components/TiltCard';
+import GlowCard from '@/components/GlowCard';
+import GlitchText from '@/components/GlitchText';
+import CodeRain from '@/components/CodeRain';
 import { articles } from '@/data/articles';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
 import { useCountUp } from '@/hooks/useCountUp';
+import { useMagnetic } from '@/hooks/useMagnetic';
 
 const latestArticles = [...articles].reverse().slice(0, 5);
 
@@ -46,6 +50,17 @@ const featuredCategories = [
   },
 ];
 
+const techStack = [
+  { name: 'React', icon: Code },
+  { name: 'TypeScript', icon: Cpu },
+  { name: 'Vue', icon: Globe },
+  { name: 'Node.js', icon: Database },
+  { name: 'Vite', icon: Zap },
+  { name: 'Webpack', icon: Rocket },
+  { name: 'TailwindCSS', icon: Sparkles },
+  { name: 'Git', icon: Code2 },
+];
+
 const stats = [
   { label: '技术文章', value: 184, suffix: '+', color: 'text-neon-cyan' },
   { label: '开源项目', value: 20, suffix: '+', color: 'text-neon-purple' },
@@ -58,6 +73,7 @@ export default function Home() {
   const categoriesRef = useScrollReveal<HTMLDivElement>();
   const ctaRef = useScrollReveal<HTMLDivElement>();
   const statsRef = useScrollReveal<HTMLDivElement>();
+  const techStackRef = useScrollReveal<HTMLDivElement>();
 
   const typewriterText = useTypewriter({
     words: ['前端开发', '技术分享', '开源爱好者', 'React / Vue', '性能优化', '工程化实践'],
@@ -71,9 +87,14 @@ export default function Home() {
   const projectCount = useCountUp({ end: 26, duration: 2000, delay: 800 });
   const codeCount = useCountUp({ end: 500, duration: 3000, delay: 1100 });
 
+  const magneticBtn1 = useMagnetic({ strength: 15, scale: 1.03 });
+  const magneticBtn2 = useMagnetic({ strength: 12, scale: 1.02 });
+  const magneticCta = useMagnetic({ strength: 20, scale: 1.05 });
+
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <ParticleBackground count={80} />
+      <ParticleBackground count={60} />
+      <CodeRain opacity={0.08} speed={0.8} />
       <CursorGlow />
 
       {/* Hero 区域 */}
@@ -114,7 +135,7 @@ export default function Home() {
           >
             <span className="text-white">用代码，</span>
             <br />
-            <span className="gradient-text-animated text-glow-purple">记录成长</span>
+            <GlitchText className="gradient-text-animated text-glow-rainbow">记录成长</GlitchText>
           </h1>
 
           <p
@@ -134,12 +155,24 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-in-up"
             style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
           >
-            <Link to="/works" className="btn-glow group">
+            <Link
+              to="/works"
+              ref={magneticBtn1.ref as React.RefObject<HTMLAnchorElement>}
+              onMouseMove={magneticBtn1.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              onMouseLeave={magneticBtn1.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              className="btn-glow group inline-flex"
+            >
               <Sparkles className="w-4 h-4 mr-2" strokeWidth={1.5} />
               浏览文章
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={1.5} />
             </Link>
-            <Link to="/contact" className="btn-neon-outline group">
+            <Link
+              to="/contact"
+              ref={magneticBtn2.ref as React.RefObject<HTMLAnchorElement>}
+              onMouseMove={magneticBtn2.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              onMouseLeave={magneticBtn2.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+              className="btn-neon-outline group inline-flex"
+            >
               <Zap className="w-4 h-4 mr-2" strokeWidth={1.5} />
               联系我
             </Link>
@@ -220,6 +253,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 技术栈跑马灯 */}
+      <section className="py-16 relative z-10 overflow-hidden">
+        <div ref={techStackRef} className="reveal">
+          <div className="text-center mb-10">
+            <span className="font-mono text-xs tracking-[0.2em] text-white/30 uppercase">
+              技术栈
+            </span>
+          </div>
+          <div className="marquee-container">
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-950 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-950 to-transparent z-10 pointer-events-none" />
+            <div className="marquee-content">
+              {[...techStack, ...techStack].map((tech, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 px-6 py-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group flex-shrink-0"
+                >
+                  <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
+                  <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 热门分类 */}
       <section className="section-padding px-6 md:px-8 relative z-10">
         <div className="container">
@@ -244,25 +305,27 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredCategories.map((cat, index) => (
                 <TiltCard key={cat.title} max={12}>
-                  <Link
-                    to="/works"
-                    className="group gradient-border-card p-6 block h-full hover:scale-100 transition-all duration-300"
-                    style={{ transitionDelay: `${index * 50}ms` }}
-                  >
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${cat.glow}`}>
-                      <cat.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:gradient-text transition-all duration-300">
-                      {cat.title}
-                    </h3>
-                    <p className="text-white/40 text-sm">
-                      {cat.desc}
-                    </p>
-                    <div className="mt-4 flex items-center gap-1 text-neon-cyan/0 group-hover:text-neon-cyan transition-all duration-300">
-                      <span className="font-mono text-xs">查看更多</span>
-                      <ArrowRight className="w-3.5 h-3.5 -translate-x-2 group-hover:translate-x-0 transition-transform duration-300" strokeWidth={1.5} />
-                    </div>
-                  </Link>
+                  <GlowCard className="h-full">
+                    <Link
+                      to="/works"
+                      className="group gradient-border-card p-6 block h-full hover:scale-100 transition-all duration-300"
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                    >
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${cat.glow}`}>
+                        <cat.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
+                      </div>
+                      <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:gradient-text transition-all duration-300">
+                        {cat.title}
+                      </h3>
+                      <p className="text-white/40 text-sm">
+                        {cat.desc}
+                      </p>
+                      <div className="mt-4 flex items-center gap-1 text-neon-cyan/0 group-hover:text-neon-cyan transition-all duration-300">
+                        <span className="font-mono text-xs">查看更多</span>
+                        <ArrowRight className="w-3.5 h-3.5 -translate-x-2 group-hover:translate-x-0 transition-transform duration-300" strokeWidth={1.5} />
+                      </div>
+                    </Link>
+                  </GlowCard>
                 </TiltCard>
               ))}
             </div>
@@ -281,31 +344,39 @@ export default function Home() {
       <section className="section-padding px-6 md:px-8 relative z-10">
         <div className="container">
           <div ref={ctaRef} className="reveal max-w-3xl mx-auto text-center">
-            <div className="gradient-border-card p-12 md:p-20 relative overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-neon-purple/10 blur-[100px]" />
-              <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-neon-cyan/5 blur-[80px]" />
+            <GlowCard>
+              <div className="gradient-border-card p-12 md:p-20 relative overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-neon-purple/10 blur-[100px]" />
+                <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-neon-cyan/5 blur-[80px]" />
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <span className="font-mono text-xs tracking-[0.2em] text-neon-cyan uppercase">
-                    联系我
-                  </span>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <span className="font-mono text-xs tracking-[0.2em] text-neon-cyan uppercase">
+                      联系我
+                    </span>
+                  </div>
+                  <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-6 text-balance">
+                    有技术话题？
+                    <br />
+                    <GlitchText className="gradient-text-animated text-glow-rainbow">一起聊聊</GlitchText>
+                  </h2>
+                  <p className="text-white/40 text-lg mb-10">
+                    无论是技术交流、项目合作，还是单纯想探讨前端趋势，
+                    我都很乐意和你交流。
+                  </p>
+                  <Link
+                    to="/contact"
+                    ref={magneticCta.ref as React.RefObject<HTMLAnchorElement>}
+                    onMouseMove={magneticCta.onMouseMove as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+                    onMouseLeave={magneticCta.onMouseLeave as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+                    className="btn-glow text-base px-8 py-3.5 inline-flex"
+                  >
+                    开始对话
+                    <ArrowRight className="w-5 h-5 ml-2" strokeWidth={1.5} />
+                  </Link>
                 </div>
-                <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-6 text-balance">
-                  有技术话题？
-                  <br />
-                  <span className="gradient-text-animated">一起聊聊</span>
-                </h2>
-                <p className="text-white/40 text-lg mb-10">
-                  无论是技术交流、项目合作，还是单纯想探讨前端趋势，
-                  我都很乐意和你交流。
-                </p>
-                <Link to="/contact" className="btn-glow text-base px-8 py-3.5">
-                  开始对话
-                  <ArrowRight className="w-5 h-5 ml-2" strokeWidth={1.5} />
-                </Link>
               </div>
-            </div>
+            </GlowCard>
           </div>
         </div>
       </section>
