@@ -228,17 +228,19 @@
   /* 跑马灯文字 */
   .marquee-container {
     overflow: hidden;
-    white-space: nowrap;
     position: relative;
+    width: 100%;
   }
   .marquee-content {
-    display: inline-flex;
-    gap: 1.5rem;
-    animation: marquee 30s linear infinite;
-    white-space: nowrap;
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
   }
   .marquee-content:hover {
     animation-play-state: paused;
+  }
+  .marquee-item {
+    flex-shrink: 0;
   }
 
   /* 玻璃态增强 */

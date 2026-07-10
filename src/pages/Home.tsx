@@ -268,12 +268,14 @@ export default function Home() {
               {[...techStack, ...techStack].map((tech, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 px-6 py-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group flex-shrink-0"
+                  className="marquee-item mr-6"
                 >
-                  <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
-                  <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
-                    {tech.name}
-                  </span>
+                  <div className="flex items-center gap-3 px-6 py-3 rounded-xl glass hover:glass-strong transition-all duration-300 hover:scale-105 group">
+                    <tech.icon className="w-5 h-5 text-neon-cyan group-hover:text-neon-purple transition-colors duration-300 flex-shrink-0" strokeWidth={1.5} />
+                    <span className="font-mono text-sm text-white/60 group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+                      {tech.name}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
