@@ -1,0 +1,63 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d14"/>
+      <stop offset="100%" stop-color="#1a1a28"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="strokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景：圆角矩形 + 渐变 -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bgGrad)"/>
+
+  <!-- 内描边边框 -->
+  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" fill="none" stroke="url(#strokeGrad)" stroke-width="0.5" stroke-opacity="0.4"/>
+
+  <!-- 装饰点：左上角 -->
+  <circle cx="9" cy="9" r="0.8" fill="#22d3ee" opacity="0.6"/>
+  <!-- 装饰点：右下角 -->
+  <circle cx="55" cy="55" r="0.8" fill="#ec4899" opacity="0.6"/>
+
+  <!-- 主体：六边形外框 -->
+  <path d="M32 12 L46 20 L46 36 L32 44 L18 36 L18 20 Z" fill="none" stroke="url(#cyanGrad)" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- 内层装饰：菱形 -->
+  <path d="M32 18 L40 24 L32 30 L24 24 Z" fill="url(#cyanGrad)" opacity="0.15" filter="url(#glow)"/>
+
+  <!-- 中心：代码括号符号 </>
+       左括号 < -->
+  <path d="M28 26 L24 30 L28 34" fill="none" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#strongGlow)"/>
+  <!-- 右括号 > -->
+  <path d="M36 26 L40 30 L36 34" fill="none" stroke="#a855f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#strongGlow)"/>
+  <!-- 斜杠 / -->
+  <path d="M34 25 L30 35" fill="none" stroke="#ec4899" stroke-width="1.8" stroke-linecap="round" filter="url(#strongGlow)"/>
+
+  <!-- 底部装饰：渐变线 -->
+  <line x1="22" y1="50" x2="42" y2="50" stroke="url(#strokeGrad)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <!-- 底部小圆点 -->
+  <circle cx="32" cy="50" r="1.2" fill="#22d3ee" filter="url(#glow)"/>
+  <circle cx="26" cy="50" r="0.8" fill="#a855f7" opacity="0.7"/>
+  <circle cx="38" cy="50" r="0.8" fill="#ec4899" opacity="0.7"/>
+</svg>
