@@ -60,7 +60,7 @@ export default function Home() {
             className="text-lg md:text-xl text-ink-500 leading-relaxed max-w-xl mx-auto mb-10 opacity-0 animate-fade-in-up"
             style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
           >
-            你好，我是码匠，一名前端工程师。
+            你好，我是智发，一名前端工程师。
             坚持每周一篇技术分享，至今已发布 <span className="text-ochre-500 font-medium">{articles.length}</span> 篇文章。
           </p>
           <div

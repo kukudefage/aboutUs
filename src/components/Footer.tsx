@@ -13,7 +13,7 @@ export default function Footer() {
               to="/"
               className="font-display text-2xl font-medium text-ink-900 tracking-tight"
             >
-              码<span className="text-ochre-500">.</span>匠
+              智<span className="text-ochre-500">.</span>发
             </Link>
             <p className="mt-3 text-ink-400 font-sans text-sm max-w-xs">
               前端开发者的技术分享空间，记录成长，分享思考。
@@ -45,9 +45,6 @@ export default function Footer() {
               </a>
             </div>
 
-            <p className="text-ink-400 font-sans text-xs">
-              © {currentYear} 码匠的技术博客. 保留所有权利.
-            </p>
           </div>
         </div>
       </div>

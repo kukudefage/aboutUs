@@ -40,7 +40,7 @@ export default function Navbar() {
             to="/"
             className="font-display text-2xl md:text-3xl font-medium text-ink-900 tracking-tight hover:text-ochre-500 transition-colors duration-300"
           >
-            墨<span className="text-ochre-500">.</span>白
+            智<span className="text-ochre-500">.</span>发
           </Link>
 
           <ul className="hidden md:flex items-center gap-10">
