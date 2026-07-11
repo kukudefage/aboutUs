@@ -12,7 +12,7 @@ export default function Works() {
   const headerRef = useScrollReveal<HTMLDivElement>();
   const listRef = useScrollReveal<HTMLDivElement>();
 
-  const { articles, categories, loading } = useArticles(activeCategory);
+  const { articles, categories, loading, error } = useArticles(activeCategory);
 
   const allCategories = ['全部', ...categories.map(c => c.name)];
 
@@ -109,6 +109,11 @@ export default function Works() {
                 <p className="text-dark-900/30 dark:text-white/30 font-sans">
                   该分类下暂无文章
                 </p>
+                {error && (
+                  <p className="text-red-500 text-sm mt-4">
+                    错误: {error.message}
+                  </p>
+                )}
               </div>
             )}
 

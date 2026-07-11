@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabaseFetch } from '@/lib/supabase';
 
 export interface ArticleFromDB {
   id: number;
@@ -47,26 +47,21 @@ export function useArticles(filter: string = '全部') {
 
       try {
         const [articlesRes, categoriesRes] = await Promise.all([
-          supabase
-            .from('articles')
-            .select('*')
-            .eq('status', 1)
-            .is('deleted_at', null)
-            .order('published_at', { ascending: false }),
-          supabase
-            .from('article_categories')
-            .select('*')
-            .eq('is_active', 1)
-            .order('sort_order', { ascending: true }),
+          supabaseFetch<ArticleFromDB[]>(
+            '/articles?select=*&status=eq.1&deleted_at=is.null&order=published_at.desc'
+          ),
+          supabaseFetch<CategoryFromDB[]>(
+            '/article_categories?select=*&is_active=eq.1&order=sort_order.asc'
+          ),
         ]);
 
-        if (articlesRes.error) throw articlesRes.error;
-        if (categoriesRes.error) throw categoriesRes.error;
+        if (articlesRes.error) throw new Error(articlesRes.error.message);
+        if (categoriesRes.error) throw new Error(categoriesRes.error.message);
 
-        const catData = categoriesRes.data as CategoryFromDB[];
+        const catData = categoriesRes.data || [];
         const categoryMap = new Map(catData.map(c => [c.id, c]));
 
-        let filteredArticles = (articlesRes.data as ArticleFromDB[]).map(article => ({
+        let filteredArticles = (articlesRes.data || []).map(article => ({
           ...article,
           category: categoryMap.get(article.category_id),
         }));
@@ -108,49 +103,44 @@ export function useArticle(id: string | undefined) {
       setError(null);
 
       try {
-        let articleRes;
         const parsedId = parseInt(id, 10);
-        
+        let articleRes;
+
         if (isNaN(parsedId)) {
-          articleRes = await supabase
-            .from('articles')
-            .select('*')
-            .eq('slug', id)
-            .eq('status', 1)
-            .is('deleted_at', null)
-            .single();
+          articleRes = await supabaseFetch<ArticleFromDB>(
+            `/articles?select=*&slug=eq.${encodeURIComponent(id)}&status=eq.1&deleted_at=is.null`
+          );
+          // slug query returns array
+          const articles = articleRes.data as unknown as ArticleFromDB[];
+          if (!articles || articles.length === 0) {
+            throw new Error('Article not found');
+          }
+          articleRes = { data: articles[0], error: null };
         } else {
-          articleRes = await supabase
-            .from('articles')
-            .select('*')
-            .eq('id', parsedId)
-            .eq('status', 1)
-            .is('deleted_at', null)
-            .single();
+          articleRes = await supabaseFetch<ArticleFromDB>(
+            `/articles?select=*&id=eq.${parsedId}&status=eq.1&deleted_at=is.null`
+          );
+          const articles = articleRes.data as unknown as ArticleFromDB[];
+          if (!articles || articles.length === 0) {
+            throw new Error('Article not found');
+          }
+          articleRes = { data: articles[0], error: null };
         }
 
-        if (articleRes.error && articleRes.error.code !== 'PGRST116') {
-          throw articleRes.error;
-        }
+        if (articleRes.error) throw new Error(articleRes.error.message);
 
-        if (!articleRes.data) {
-          throw new Error('Article not found');
-        }
+        const articleData = articleRes.data as ArticleFromDB;
 
-        const catRes = await supabase
-          .from('article_categories')
-          .select('id, name, slug')
-          .eq('id', articleRes.data.category_id)
-          .single();
-
-        const category = catRes.data ? catRes.data as CategoryFromDB : undefined;
+        const catRes = await supabaseFetch<CategoryFromDB>(
+          `/article_categories?select=id,name,slug&id=eq.${articleData.category_id}`
+        );
+        const categories = catRes.data as unknown as CategoryFromDB[];
+        const category = categories && categories.length > 0 ? categories[0] : undefined;
 
         setArticle({
-          ...(articleRes.data as ArticleFromDB),
+          ...articleData,
           category,
         });
-        
-        await incrementViews(articleRes.data.id);
       } catch (err) {
         if (err instanceof Error && err.message !== 'Article not found') {
           setError(err);
@@ -164,11 +154,4 @@ export function useArticle(id: string | undefined) {
   }, [id]);
 
   return { article, loading, error };
-}
-
-async function incrementViews(articleId: number) {
-  await supabase
-    .from('articles')
-    .update({ views: supabase.rpc('increment', { value: 1 }) })
-    .eq('id', articleId);
 }
