@@ -7,14 +7,12 @@ import TiltCard from '@/components/TiltCard';
 import GlowCard from '@/components/GlowCard';
 import GlitchText from '@/components/GlitchText';
 import CodeRain from '@/components/CodeRain';
-import { articles } from '@/data/articles';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
 import { useCountUp } from '@/hooks/useCountUp';
 import { useMagnetic } from '@/hooks/useMagnetic';
 import { useSaveNavigationState, useRestoreScrollPosition } from '@/hooks/useNavigationHistory';
-
-const latestArticles = [...articles].reverse().slice(0, 5);
+import { useArticles } from '@/hooks/useArticles';
 
 const featuredCategories = [
   {
@@ -85,6 +83,8 @@ export default function Home() {
     pauseTime: 2000,
     loop: true,
   });
+
+  const { articles, loading } = useArticles();
 
   const articleCount = useCountUp({ end: articles.length, duration: 2500, delay: 500 });
   const projectCount = useCountUp({ end: 26, duration: 2000, delay: 800 });
@@ -244,9 +244,18 @@ export default function Home() {
             </div>
 
             <div className="space-y-1">
-              {latestArticles.map((article, index) => (
-                <ArticleCard key={article.id} article={article} index={index} />
-              ))}
+              {loading ? (
+                Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="p-4 rounded-lg bg-dark-900/5 dark:bg-white/5 border border-dark-900/10 dark:border-white/10 animate-pulse">
+                    <div className="h-5 bg-dark-900/20 dark:bg-white/20 rounded w-3/4 mb-2" />
+                    <div className="h-3 bg-dark-900/15 dark:bg-white/15 rounded w-full" />
+                  </div>
+                ))
+              ) : (
+                articles.slice(0, 5).map((article, index) => (
+                  <ArticleCard key={article.id} article={article} index={index} />
+                ))
+              )}
             </div>
           </div>
         </div>
