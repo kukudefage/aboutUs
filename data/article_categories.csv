@@ -1,0 +1,13 @@
+id,name,slug,description,sort_order,icon,is_active,created_at,updated_at
+1,React,react,React 相关技术文章,1,Code,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+2,TypeScript,typescript,TypeScript 类型系统与实战,2,FileType,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+3,Vue,vue,Vue.js 框架教程,3,Layers,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+4,JavaScript,javascript,JavaScript 核心知识,4,Terminal,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+5,工程化,engineering,前端工程化实践,5,Settings,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+6,性能优化,performance,性能优化技巧,6,Zap,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+7,架构,architecture,系统架构设计,7,Database,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+8,Node.js,nodejs,Node.js 服务端开发,8,Server,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+9,数据库,database,数据库设计与优化,9,Database,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+10,安全,security,Web 安全实践,10,Shield,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+11,测试,testing,自动化测试与质量保证,11,CheckCircle,1,2026-07-11 00:00:00,2026-07-11 00:00:00
+12,前端趋势,trends,前端技术发展趋势,12,TrendingUp,1,2026-07-11 00:00:00,2026-07-11 00:00:00
