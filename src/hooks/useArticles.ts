@@ -49,10 +49,7 @@ export function useArticles(filter: string = '全部') {
         const [articlesRes, categoriesRes] = await Promise.all([
           supabase
             .from('articles')
-            .select(`
-              *,
-              category:article_categories(id, name, slug)
-            `)
+            .select('*')
             .eq('status', 1)
             .is('deleted_at', null)
             .order('published_at', { ascending: false }),
@@ -66,7 +63,13 @@ export function useArticles(filter: string = '全部') {
         if (articlesRes.error) throw articlesRes.error;
         if (categoriesRes.error) throw categoriesRes.error;
 
-        let filteredArticles = articlesRes.data as ArticleFromDB[];
+        const catData = categoriesRes.data as CategoryFromDB[];
+        const categoryMap = new Map(catData.map(c => [c.id, c]));
+
+        let filteredArticles = (articlesRes.data as ArticleFromDB[]).map(article => ({
+          ...article,
+          category: categoryMap.get(article.category_id),
+        }));
 
         if (filter !== '全部') {
           filteredArticles = filteredArticles.filter(
@@ -75,7 +78,7 @@ export function useArticles(filter: string = '全部') {
         }
 
         setArticles(filteredArticles);
-        setCategories(categoriesRes.data as CategoryFromDB[]);
+        setCategories(catData);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to fetch articles'));
       } finally {
@@ -105,46 +108,49 @@ export function useArticle(id: string | undefined) {
       setError(null);
 
       try {
+        let articleRes;
         const parsedId = parseInt(id, 10);
+        
         if (isNaN(parsedId)) {
-          const slugRes = await supabase
+          articleRes = await supabase
             .from('articles')
-            .select(`
-              *,
-              category:article_categories(id, name, slug)
-            `)
+            .select('*')
             .eq('slug', id)
             .eq('status', 1)
             .is('deleted_at', null)
             .single();
-
-          if (slugRes.error && slugRes.error.code !== 'PGRST116') {
-            throw slugRes.error;
-          }
-
-          if (slugRes.data) {
-            setArticle(slugRes.data as ArticleFromDB);
-            await incrementViews(slugRes.data.id);
-          } else {
-            throw new Error('Article not found');
-          }
         } else {
-          const res = await supabase
+          articleRes = await supabase
             .from('articles')
-            .select(`
-              *,
-              category:article_categories(id, name, slug)
-            `)
+            .select('*')
             .eq('id', parsedId)
             .eq('status', 1)
             .is('deleted_at', null)
             .single();
-
-          if (res.error) throw res.error;
-
-          setArticle(res.data as ArticleFromDB);
-          await incrementViews(res.data.id);
         }
+
+        if (articleRes.error && articleRes.error.code !== 'PGRST116') {
+          throw articleRes.error;
+        }
+
+        if (!articleRes.data) {
+          throw new Error('Article not found');
+        }
+
+        const catRes = await supabase
+          .from('article_categories')
+          .select('id, name, slug')
+          .eq('id', articleRes.data.category_id)
+          .single();
+
+        const category = catRes.data ? catRes.data as CategoryFromDB : undefined;
+
+        setArticle({
+          ...(articleRes.data as ArticleFromDB),
+          category,
+        });
+        
+        await incrementViews(articleRes.data.id);
       } catch (err) {
         if (err instanceof Error && err.message !== 'Article not found') {
           setError(err);
