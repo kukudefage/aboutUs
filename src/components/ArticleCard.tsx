@@ -1,15 +1,20 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import type { Article } from '@/data/articles';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { ArticleFromDB } from '@/hooks/useArticles';
 
 interface ArticleCardProps {
-  article: Article;
+  article: ArticleFromDB;
   index?: number;
 }
 
 export default function ArticleCard({ article, index = 0 }: ArticleCardProps) {
   const ref = useScrollReveal<HTMLDivElement>();
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  };
 
   return (
     <Link
@@ -26,10 +31,10 @@ export default function ArticleCard({ article, index = 0 }: ArticleCardProps) {
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
                 <span className="font-mono text-xs tracking-wider text-dark-900/40 dark:text-white/30">
-                  {article.date}
+                  {formatDate(article.published_at)}
                 </span>
                 <span className="font-mono text-xs text-neon-cyan/80 bg-neon-cyan/10 px-2.5 py-0.5 rounded-full border border-neon-cyan/20">
-                  {article.category}
+                  {article.category?.name || article.category_id}
                 </span>
               </div>
 
@@ -42,7 +47,7 @@ export default function ArticleCard({ article, index = 0 }: ArticleCardProps) {
               </p>
 
               <div className="mt-3 flex items-center gap-2 font-mono text-xs text-dark-900/40 dark:text-white/30">
-                <span>{article.readTime}阅读</span>
+                <span>{article.read_time}分钟阅读</span>
                 <span className="flex items-center gap-1 text-neon-cyan opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                   阅读全文
                   <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />

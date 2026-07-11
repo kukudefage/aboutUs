@@ -1,12 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
-import { articles } from '@/data/articles';
 import { useNavigationHistory } from '@/hooks/useNavigationHistory';
+import { useArticle } from '@/hooks/useArticles';
 
 export default function ArticleDetail() {
   const { id } = useParams<{ id: string }>();
   const { goBack, hasHistory, prevPath } = useNavigationHistory();
-  const article = articles.find(a => a.id === id);
+  const { article, loading } = useArticle(id);
 
   const getBackButtonText = () => {
     if (!hasHistory) return '返回文章列表';
@@ -14,6 +14,23 @@ export default function ArticleDetail() {
     if (prevPath === '/works') return '返回文章列表';
     return '上一页';
   };
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-32 flex items-center justify-center">
+        <div className="animate-pulse">
+          <div className="h-8 bg-dark-900/20 dark:bg-white/20 rounded w-48 mb-4" />
+          <div className="h-4 bg-dark-900/15 dark:bg-white/15 rounded w-64 mb-2" />
+          <div className="h-4 bg-dark-900/15 dark:bg-white/15 rounded w-80" />
+        </div>
+      </div>
+    );
+  }
 
   if (!article) {
     return (
@@ -47,15 +64,15 @@ export default function ArticleDetail() {
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="font-mono text-xs text-dark-900/40 dark:text-white/30 flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5" />
-              {article.date}
+              {formatDate(article.published_at)}
             </span>
             <span className="font-mono text-xs text-dark-900/40 dark:text-white/30 flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" />
-              {article.readTime}阅读
+              {article.read_time}分钟阅读
             </span>
             <span className="font-mono text-xs text-neon-cyan/80 bg-neon-cyan/10 px-2.5 py-0.5 rounded-full border border-neon-cyan/20 flex items-center gap-1">
               <Tag className="w-3 h-3" />
-              {article.category}
+              {article.category?.name || article.category_id}
             </span>
           </div>
 
